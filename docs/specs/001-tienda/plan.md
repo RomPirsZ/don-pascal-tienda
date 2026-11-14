@@ -1,7 +1,7 @@
 # Plan técnico 001 — Tienda de Don Pascal
 
 > Cómo se construye lo que pide `spec.md`. Rige `docs/constitution.md`.
-> Estado: **borrador** (2026-11-14), pendiente de aprobación en E00.
+> Estado: **aprobado** (2026-11-14).
 
 ## 1. Chequeo de constitución
 

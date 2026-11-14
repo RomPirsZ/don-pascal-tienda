@@ -2,7 +2,7 @@
 
 > Qué se construye y por qué. Los detalles técnicos están en `plan.md`. Rige `docs/constitution.md`.
 > Proyecto 002 del portafolio [A]nkordev (spec 001 §8 del portafolio, tarea T28).
-> Estado: **borrador** (2026-11-14), pendiente de aprobación junto con la dirección visual (E00).
+> Estado: **aprobada** (2026-11-14).
 
 ---
 

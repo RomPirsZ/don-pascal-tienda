@@ -6,7 +6,7 @@
 
 ## Fase 0 — Definición
 
-- [ ] E00 Carpeta propia, constitución (copia), `CLAUDE.md`, `PRODUCT.md`, spec, plan y tareas; dirección visual con impeccable; prompt de Don Pascal
+- [x] E00 Carpeta propia, constitución (copia), `CLAUDE.md`, `PRODUCT.md`, spec, plan y tareas; dirección visual con impeccable; prompt de Don Pascal — *aprobada 2026-11-14: marca ficticia «Don Pascal», dirección «estándar de la categoría» según los Dribbble del usuario (contrato en `.impeccable/surfaces/`), ilustraciones de Don Pascal generadas con IA por el usuario, tope del asistente en 30 respuestas al día*
 
 **Hecho cuando:** el usuario aprueba la spec, el plan y la dirección, y tiene la ilustración de Don Pascal.
 
