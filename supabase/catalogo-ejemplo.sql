@@ -125,7 +125,7 @@ from (values
 join public.categorias c on c.slug = p.categoria;
 
 insert into public.ajustes (clave, valor) values
-  ('tasa_bcv', '236.40'),
+  ('tasa_bcv', '911.62'),
   ('tasa_fecha', '2026-11-14'),
   ('horario', 'Lunes a sábado de 8:00 a 21:00; domingos de 8:00 a 14:00'),
   ('direccion', 'Centro de Guanare, Portuguesa (dirección ficticia)');

@@ -16,7 +16,7 @@ const { categorias, tasa } = Astro.props;
 ---
 
 <section class="sobre-monte relative overflow-hidden bg-monte text-papel" aria-labelledby="hero-titulo">
-  <div class="contenedor grid items-center gap-8 pt-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-6 lg:pt-12">
+  <div class="contenedor grid items-center gap-8 pt-8 lg:grid-cols-[minmax(0,8fr)_minmax(0,5fr)] lg:gap-6 lg:pt-12">
     <div class="pb-2 lg:pb-20">
       <h1 id="hero-titulo" class="text-hero leading-[1.05] tracking-[-0.03em]">
         <span class="block font-bold">{t('hero.titulo-fuerte')}</span>
@@ -45,8 +45,8 @@ const { categorias, tasa } = Astro.props;
         class="relative mx-auto h-[20rem] w-auto object-contain object-top sm:h-[30rem] lg:h-[36rem]"
       />
       <p class="absolute top-[46%] left-0 flex sm:top-[22%] items-center gap-2 rounded-full bg-papel py-2 pr-4 pl-2 text-sm font-semibold text-tinta shadow-flotante sm:left-0">
-        <span class="grid size-8 place-items-center rounded-full bg-hoja"><Icono nombre="paquete" class="size-4" /></span>
-        {t('hero.insignia-mayor')}
+        <span class="grid size-8 place-items-center rounded-full bg-hoja"><Icono nombre="mensaje" class="size-4" /></span>
+        {t('hero.insignia-whatsapp')}
       </p>
       <p class="absolute right-0 bottom-[6%] flex sm:bottom-[14%] items-center gap-2 rounded-full bg-papel py-2 pr-4 pl-2 text-sm font-semibold text-tinta shadow-flotante">
         <span class="grid size-8 place-items-center rounded-full bg-maiz"><Icono nombre="reloj" class="size-4" /></span>

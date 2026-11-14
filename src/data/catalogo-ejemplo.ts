@@ -476,7 +476,7 @@ export const CATALOGO_EJEMPLO: Omit<Catalogo, 'origen'> = {
     },
   ],
   ajustes: {
-    tasaBcv: 236.40,
+    tasaBcv: 911.62,
     tasaFecha: '2026-11-14',
     horario: 'Lunes a sábado de 8:00 a 21:00; domingos de 8:00 a 14:00',
     direccion: 'Centro de Guanare, Portuguesa (dirección ficticia)',

@@ -41,7 +41,7 @@ const { productos } = Astro.props;
                 </th>
                 <td class="px-3 py-3 text-right whitespace-nowrap">{t('mayor.unidades', { n: String(p.minimoMayor) })}</td>
                 <td class="hidden px-3 py-3 text-right whitespace-nowrap text-tinta-suave sm:table-cell">{formatoUsd(precioUnitario(p))}</td>
-                <td class="px-4 py-3 text-right font-bold whitespace-nowrap text-hoja-texto">{formatoUsd(precioUnitario(p, p.minimoMayor ?? 1))}</td>
+                <td class="px-4 py-3 text-right font-bold whitespace-nowrap text-hoja-texto">{t('mayor.cada', { precio: formatoUsd(precioUnitario(p, p.minimoMayor ?? 1)) })}</td>
               </tr>
             ))
           }
