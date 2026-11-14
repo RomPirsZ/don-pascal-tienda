@@ -1,8 +1,10 @@
 {
+  "sitio.titulo": "Don Pascal · Mercado y repostería en Guanare",
   "sitio.nombre": "Don Pascal",
   "sitio.descripcion": "Mercado y repostería en Guanare, al mayor y al detal. Tienda ficticia: concepto de [A]nkordev.",
   "aviso.concepto": "Tienda ficticia: concepto de [A]nkordev. Precios de ejemplo; sin relación con ningún comercio real.",
   "404.titulo": "Esta página no está en el abasto",
   "404.texto": "Puede que el enlace esté mal escrito o que la página ya no exista.",
-  "404.volver": "Volver al inicio"
+  "404.volver": "Volver al inicio",
+  "nav.saltar": "Saltar al contenido"
 }

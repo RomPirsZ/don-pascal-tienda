@@ -1,18 +1,11 @@
 ---
+import Base from '../layouts/Base.astro';
 import { t } from '../i18n';
 ---
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>{t('404.titulo')} · {t('sitio.nombre')}</title>
-  </head>
-  <body>
-    <main>
-      <h1>{t('404.titulo')}</h1>
-      <p>{t('404.texto')}</p>
-      <a href="/">{t('404.volver')}</a>
-    </main>
-  </body>
-</html>
+<Base title={`${t('404.titulo')} · ${t('sitio.nombre')}`} noindex>
+  <main id="contenido" class="contenedor py-16">
+    <h1 class="text-titulo font-bold">{t('404.titulo')}</h1>
+    <p class="mt-4 text-tinta-suave">{t('404.texto')}</p>
+    <a href="/" class="mt-8 inline-flex rounded-full bg-maiz px-6 py-3 font-semibold text-tinta no-underline">{t('404.volver')}</a>
+  </main>
+</Base>

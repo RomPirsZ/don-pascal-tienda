@@ -1,0 +1,42 @@
+---
+import '@fontsource/poppins/latin-300.css';
+import '@fontsource/poppins/latin-400.css';
+import '@fontsource/poppins/latin-600.css';
+import '@fontsource/poppins/latin-700.css';
+import '../styles/global.css';
+import { t } from '../i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Páginas que no deben indexarse (404) */
+  noindex?: boolean;
+}
+
+const { title = t('sitio.titulo'), description = t('sitio.descripcion'), noindex = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <!-- Recortados de la ilustración de Don Pascal (src/assets/don-pascal/medio-cuerpo.png) -->
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- El color del monte: la barra del navegador móvil continúa la cabecera -->
+    <meta name="theme-color" content="rgb(30 77 58)" />
+    <meta name="color-scheme" content="only light" />
+  </head>
+  <body class="min-h-dvh">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-maiz focus:px-5 focus:py-2 focus:font-semibold focus:text-tinta"
+      >{t('nav.saltar')}</a
+    >
+    <slot />
+  </body>
+</html>

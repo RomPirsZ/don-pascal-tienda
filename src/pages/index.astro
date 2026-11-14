@@ -1,18 +1,11 @@
 ---
-// Inicio provisional (E01): la página real llega en E05 con la dirección de .impeccable/surfaces/
+// Inicio provisional (E02): la página real llega en E05 con la dirección de .impeccable/surfaces/
+import Base from '../layouts/Base.astro';
 import { t } from '../i18n';
 ---
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t('sitio.nombre')}</title>
-    <meta name="description" content={t('sitio.descripcion')} />
-  </head>
-  <body>
-    <main>
-      <h1>{t('sitio.nombre')}</h1>
-      <p>{t('aviso.concepto')}</p>
-    </main>
-  </body>
-</html>
+<Base>
+  <main id="contenido" class="contenedor py-16">
+    <h1 class="text-hero font-bold">{t('sitio.nombre')}</h1>
+    <p class="mt-4 text-tinta-suave">{t('aviso.concepto')}</p>
+  </main>
+</Base>

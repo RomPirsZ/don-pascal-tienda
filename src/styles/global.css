@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+/* Tokens (contrato de .impeccable/surfaces/; DESIGN.md los documentará en E15). Solo aquí hay colores: los
+   componentes usan los roles. Los pares de texto y fondo los vigila tests/unit/tokens.test.ts. */
+:root {
+  --monte: #1e4d3a; /* verde profundo: hero, pie y franjas oscuras */
+  --monte-claro: #2c6a50; /* arco detrás de Don Pascal y superficies sobre el monte; encima, solo papel */
+  --hoja: #5baa3c; /* el verde del delantal: rellenos con texto en tinta, nunca texto sobre papel */
+  --hoja-texto: #2e7a2e; /* verde como texto sobre papel o superficie (precios, enlaces) */
+  --pradera: #dcefd0; /* banda verde claro de categorías */
+  --maiz: #ffc93c; /* amarillo: la acción principal, con texto en tinta */
+  --aji: #f26b3a; /* naranja: solo los banners de oferta, con texto en tinta */
+  --aji-texto: #b8401a; /* el descuento escrito sobre papel */
+  --tinta: #14251c; /* texto principal */
+  --tinta-suave: #4a5d52; /* texto secundario y bordes de controles */
+  --papel: #ffffff; /* suelo de la página */
+  --superficie: #f4f7f2; /* tarjetas y secciones alternas */
+  --sobre-monte-suave: #c9ddd1; /* texto secundario sobre el monte (no sobre el monte claro) */
+  --linea: #d5dfd6; /* divisores decorativos; nunca el borde de un control */
+
+  color-scheme: only light;
+}
+
+@theme inline {
+  --color-monte: var(--monte);
+  --color-monte-claro: var(--monte-claro);
+  --color-hoja: var(--hoja);
+  --color-hoja-texto: var(--hoja-texto);
+  --color-pradera: var(--pradera);
+  --color-maiz: var(--maiz);
+  --color-aji: var(--aji);
+  --color-aji-texto: var(--aji-texto);
+  --color-tinta: var(--tinta);
+  --color-tinta-suave: var(--tinta-suave);
+  --color-papel: var(--papel);
+  --color-superficie: var(--superficie);
+  --color-sobre-monte-suave: var(--sobre-monte-suave);
+  --color-linea: var(--linea);
+
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+
+  /* Escala fluida de 390 px a 1440 px; el titular del hero no pasa de 4.5rem */
+  --text-hero: clamp(2.25rem, 1.41rem + 3.43vw, 4.5rem);
+  --text-titulo: clamp(1.75rem, 1.38rem + 1.52vw, 2.75rem);
+  --text-subtitulo: clamp(1.25rem, 1.11rem + 0.57vw, 1.625rem);
+  --text-cuerpo: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);
+  --text-pequeno: 0.875rem;
+  --text-precio: clamp(1.125rem, 1.03rem + 0.38vw, 1.375rem);
+
+  --radius-tarjeta: 1.25rem;
+  --radius-control: 0.875rem;
+
+  /* Sombras con desplazamiento y desenfoque suave, teñidas de la tinta */
+  --shadow-tarjeta: 0 10px 28px -14px color-mix(in srgb, var(--tinta) 30%, transparent);
+  --shadow-flotante: 0 14px 36px -12px color-mix(in srgb, var(--tinta) 40%, transparent);
+}
+
+@layer base {
+  html {
+    background: var(--papel);
+    color: var(--tinta);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-color: var(--tinta-suave) var(--superficie);
+    /* Los enlaces a secciones no quedan tapados por la cabecera */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    font-size: var(--text-cuerpo);
+    line-height: 1.6;
+    caret-color: var(--hoja-texto);
+  }
+
+  /* Superficies del navegador (impeccable, craft floor): también son del diseño */
+  ::selection {
+    background: var(--maiz);
+    color: var(--tinta);
+  }
+
+  /* Foco: la tinta del monte sobre lo claro; el maíz sobre lo oscuro (.sobre-monte) */
+  :focus-visible {
+    outline: 3px solid var(--monte);
+    outline-offset: 3px;
+  }
+  .sobre-monte :focus-visible {
+    outline-color: var(--maiz);
+  }
+
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+
+  /* Cifras de precios alineadas en columnas */
+  .precio {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .contenedor {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 48rem) {
+    .contenedor {
+      padding-inline: 2.5rem;
+    }
+  }
+}

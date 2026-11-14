@@ -13,7 +13,7 @@
 ## Fase 1 — Base
 
 - [x] E01 Proyecto Astro + Cloudflare + Tailwind + TypeScript estricto con las dependencias del plan §2; `wrangler.jsonc`, `_headers`, middleware y cabeceras del servidor; Vitest, Playwright y `npm test`; CI — *base copiada del portafolio (cabeceras, middleware, tests de dependencias y de `wrangler.jsonc`, CI y Dependabot); `wrangler` 4.156.1 para alinearlo con el plugin del adaptador; sin URL de vista previa; e2e en el puerto 4349; las ilustraciones pasan a `src/assets/don-pascal/`*
-- [ ] E02 Tokens de la dirección en `global.css` + test de contraste; fuentes; `Base.astro`
+- [x] E02 Tokens de la dirección en `global.css` + test de contraste; fuentes; `Base.astro` — *14 roles de color con 17 pares de texto en AA, bordes de control y anillos de foco a 3:1 y ningún hex fuera de `:root`; Poppins 300/400/600/700 desde el sitio; selección, cursor, foco y barra de desplazamiento con la paleta; favicon e icono de Apple recortados de la ilustración*
 - [ ] E03 `supabase/tienda.sql` y `catalogo-ejemplo.sql` (unos 30 productos genéricos con fotos libres y créditos); RLS verificada con la API; `keepalive`
 
 **Hecho cuando:** `npm test` en verde y el catálogo se lee desde Supabase.
