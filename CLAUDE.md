@@ -37,8 +37,10 @@ Textos de interfaz siempre en `src/i18n/es.json`.
 | Afinar duraciones y curvas existentes | **transitions-polish** |
 | Ilustraciones estáticas en la paleta de la tienda | **canvas-design** |
 | Llamadas a la API de Claude | **claude-api** (léela antes de tocar el asistente) |
+| Textos de marketing: titulares, frases de apoyo, CTA, títulos y descripciones | **copywriting** (la principal) y **landing-page-copy** (fórmulas de hero y objeciones) |
 
 Choques conocidos:
+- **Prueba social (landing-page-copy y copywriting):** proponen logos, testimonios, cifras y casos de éxito. Aquí no existen y no se inventan (PRODUCT.md): esas secciones no se escriben, y una afirmación sin respaldo se cambia por una que sí lo tenga.
 - **Movimiento (constitución II, 1.3.0):** se pueden animar `transform`, `opacity`, `clip-path`, `mask`, filtros (blur incluido), color, fondo, borde y `box-shadow`. Nunca propiedades que recalculan el diseño (`width`, `height`, `top`, `left`, `margin`…). Sin WebGL: el fondo WebGL es solo del portafolio. Si un skill propone otra cosa, se descarta.
 - **Scripts:** nunca por CDN. Todo por npm y servido desde el propio sitio.
 - **Fotos:** las de producto son libres y llevan créditos. La mascota (Don Pascal) está generada con IA por el usuario y se acredita como tal. Nunca se presentan como trabajo o clientes reales.
