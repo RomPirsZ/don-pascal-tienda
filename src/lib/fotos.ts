@@ -16,7 +16,7 @@ const srcset = (ruta: (ancho: number) => string, anchos: number[]) => anchos.map
 export function fotoProducto(slug: string): Imagen | undefined {
   if (!FOTOS_DISPONIBLES.has(slug)) return undefined;
   const ruta = (ancho: number) => `/img/productos/${slug}-${ancho}.webp`;
-  return { src: ruta(360), srcset: srcset(ruta, [240, 360, 480]), width: 480, height: 480 };
+  return { src: ruta(360), srcset: srcset(ruta, [240, 360, 480, 640]), width: 640, height: 640 };
 }
 
 /** Don Pascal de cuerpo entero, con transparencia (proporción del original, 1340 × 2400). */

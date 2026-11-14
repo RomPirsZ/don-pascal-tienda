@@ -9,10 +9,10 @@ cd "$(dirname "$0")/.."
 salida=public/img
 rm -rf "$salida" && mkdir -p "$salida/productos"
 
-# Productos: cuadrados, tres anchos
+# Productos: cuadrados, cuatro anchos (el de 640 es el de la ficha)
 for foto in src/assets/productos/*.jpg; do
   slug=$(basename "$foto" .jpg)
-  for ancho in 240 360 480; do
+  for ancho in 240 360 480 640; do
     magick "$foto" -resize "${ancho}x${ancho}" -strip -quality 78 "$salida/productos/$slug-$ancho.webp"
   done
 done

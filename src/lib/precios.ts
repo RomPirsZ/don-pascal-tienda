@@ -22,6 +22,15 @@ function exigirCantidad(cantidad: number): void {
 export const tieneMayor = (p: PrecioBase): boolean => p.precioMayorUsd !== null && p.minimoMayor !== null;
 
 /**
+ * Centavos que se ahorran por unidad al comprar el mínimo al mayor. Cero si no hay precio al
+ * mayor o si no mejora el de la oferta: entonces la web no ofrece «al mayor» para ese producto.
+ */
+export function ahorroMayor(p: PrecioBase): number {
+  if (!tieneMayor(p)) return 0;
+  return Math.max(0, precioUnitario(p) - precioUnitario(p, p.minimoMayor as number));
+}
+
+/**
  * Precio por unidad en centavos para una cantidad: el de oferta si la hay y, desde el
  * mínimo al mayor, el más bajo entre ese y el de mayor.
  */

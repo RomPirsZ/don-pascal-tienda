@@ -14,7 +14,7 @@ interface Props {
 
 const { producto, tasa } = Astro.props;
 const foto = fotoProducto(producto.slug);
-const pedir = enlaceWhatsApp(mensajeProducto(producto, tasa), NUMERO_TIENDA);
+const pedir = producto.disponible ? enlaceWhatsApp(mensajeProducto(producto, tasa), NUMERO_TIENDA) : null;
 const ficha = `/productos/${producto.slug}/`;
 ---
 
@@ -45,6 +45,7 @@ const ficha = `/productos/${producto.slug}/`;
     <p class="text-sm text-tinta-suave">{producto.presentacion}</p>
     <div class="mt-auto flex items-end justify-between gap-2 pt-2">
       <Precio producto={producto} tasa={tasa} />
+      {producto.disponible ? (
       <button
         type="button"
         data-anadir={producto.slug}
@@ -54,6 +55,9 @@ const ficha = `/productos/${producto.slug}/`;
       >
         <Icono nombre="mas" class="size-5" />
       </button>
+      ) : (
+        <span class="relative z-10 shrink-0 rounded-full bg-superficie px-3 py-1.5 text-sm font-semibold text-tinta-suave">{t('ficha.agotado')}</span>
+      )}
       {
         pedir && (
           <a

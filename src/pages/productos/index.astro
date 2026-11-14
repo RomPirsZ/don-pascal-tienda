@@ -1,0 +1,84 @@
+---
+// Catálogo (spec §4): búsqueda y filtros por la URL, con un formulario GET que funciona sin JS.
+import Tienda from '../../layouts/Tienda.astro';
+import Buscador from '../../components/Buscador.astro';
+import Icono from '../../components/Icono.astro';
+import TarjetaProducto from '../../components/TarjetaProducto.astro';
+import { t } from '../../i18n';
+import { catalogoDelServidor } from '../../lib/catalogo-servidor';
+import { aplicarFiltros, leerFiltros, urlCatalogo } from '../../lib/filtros';
+
+export const prerender = false;
+
+const catalogo = await catalogoDelServidor();
+if (!catalogo) Astro.response.status = 503;
+
+const categorias = catalogo?.categorias ?? [];
+const filtros = leerFiltros(Astro.url.searchParams, categorias);
+const productos = catalogo ? aplicarFiltros(catalogo.productos, filtros) : [];
+const categoria = categorias.find((c) => c.slug === filtros.categoria);
+
+const titulo = filtros.texto
+  ? t('catalogo.titulo-busqueda', { q: filtros.texto })
+  : filtros.mayor
+    ? t('catalogo.titulo-mayor')
+    : (categoria?.nombre ?? t('catalogo.titulo'));
+const cantidad = productos.length === 1 ? t('catalogo.cantidad-uno') : t('catalogo.cantidad', { n: String(productos.length) });
+const chip = 'inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold no-underline transition-colors duration-150';
+---
+
+<Tienda title={`${titulo} | ${t('sitio.nombre')}`} description={t('catalogo.descripcion')} ajustes={catalogo?.ajustes} sinCatalogo={!catalogo}>
+  <section class="bg-superficie py-10 lg:py-14" aria-labelledby="catalogo-titulo">
+    <div class="contenedor">
+      <h1 id="catalogo-titulo" class="text-titulo font-bold">{titulo}</h1>
+      <div class="mt-6">
+        <Buscador categorias={categorias} texto={filtros.texto} categoria={filtros.categoria ?? ''} />
+      </div>
+      <nav aria-label={t('catalogo.filtros')} class="mt-6">
+        <ul class="flex flex-wrap gap-2">
+          <li>
+            <a href={urlCatalogo(filtros, { categoria: null })} aria-current={filtros.categoria === null ? 'page' : undefined} class:list={[chip, filtros.categoria === null ? 'bg-monte text-papel' : 'bg-papel text-tinta shadow-tarjeta hover:bg-pradera']}>
+              {t('catalogo.todas')}
+            </a>
+          </li>
+          {
+            categorias.map((c) => (
+              <li>
+                <a href={urlCatalogo(filtros, { categoria: c.slug })} aria-current={filtros.categoria === c.slug ? 'page' : undefined} class:list={[chip, filtros.categoria === c.slug ? 'bg-monte text-papel' : 'bg-papel text-tinta shadow-tarjeta hover:bg-pradera']}>
+                  {c.nombre}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <a href={urlCatalogo(filtros, { mayor: !filtros.mayor })} class:list={[chip, 'mt-3 -ml-1 text-hoja-texto hover:underline']}>
+        <Icono nombre="paquete" class="size-4" />
+        {filtros.mayor ? t('catalogo.mayor-quitar') : t('catalogo.mayor')}
+      </a>
+    </div>
+  </section>
+
+  <section class="contenedor py-10 lg:py-14" aria-label={t('catalogo.resultados')}>
+    <p class="text-tinta-suave" role="status">{cantidad}</p>
+    {
+      productos.length > 0 ? (
+        <ul class="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {productos.map((p) => <li class="flex"><TarjetaProducto producto={p} tasa={catalogo!.ajustes.tasaBcv} /></li>)}
+        </ul>
+      ) : (
+        <div class="mt-6 max-w-[40rem] rounded-tarjeta bg-superficie p-6 sm:p-8">
+          <h2 class="text-subtitulo font-semibold">{filtros.texto ? t('catalogo.vacio-busqueda', { q: filtros.texto }) : t('catalogo.vacio')}</h2>
+          <p class="mt-3">{t('catalogo.vacio-texto')}</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/productos/" class="inline-flex items-center gap-2 rounded-full bg-maiz px-5 py-2.5 font-semibold text-tinta no-underline">{t('catalogo.ver-todo')}</a>
+            <a href="/#pregunta" class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-semibold text-hoja-texto no-underline hover:underline">
+              <Icono nombre="mensaje" class="size-5" />
+              {t('hero.pregunta')}
+            </a>
+          </div>
+        </div>
+      )
+    }
+  </section>
+</Tienda>

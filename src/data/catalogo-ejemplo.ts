@@ -117,7 +117,7 @@ export const CATALOGO_EJEMPLO: Omit<Catalogo, 'origen'> = {
       presentacion: '1 kg',
       descripcion: 'Listo para forrar y modelar tortas.',
       precioUsd: 6.8,
-      precioMayorUsd: 6,
+      precioMayorUsd: 5.5,
       minimoMayor: 5,
       ofertaPct: 15,
       disponible: true,

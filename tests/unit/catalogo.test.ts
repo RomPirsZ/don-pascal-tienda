@@ -164,9 +164,9 @@ describe('búsqueda', () => {
 });
 
 describe('imágenes preparadas (scripts/imagenes.sh)', () => {
-  it('cada producto del catálogo tiene sus tres anchos en WebP', () => {
+  it('cada producto del catálogo tiene sus cuatro anchos en WebP', () => {
     for (const { slug } of CATALOGO_EJEMPLO.productos) {
-      for (const ancho of [240, 360, 480]) {
+      for (const ancho of [240, 360, 480, 640]) {
         expect(() => readFileSync(`public/img/productos/${slug}-${ancho}.webp`), `${slug}-${ancho}`).not.toThrow();
       }
     }

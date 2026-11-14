@@ -8,6 +8,7 @@ import {
   formatoUsd,
   precioUnitario,
   subtotal,
+  ahorroMayor,
   tieneMayor,
 } from '../../src/lib/precios';
 
@@ -96,5 +97,18 @@ describe('tieneMayor', () => {
   it('solo si hay precio y mínimo', () => {
     expect(tieneMayor(harina)).toBe(true);
     expect(tieneMayor(sal)).toBe(false);
+  });
+});
+
+describe('ahorroMayor', () => {
+  it('cuánto se ahorra por unidad al llegar al mínimo', () => {
+    expect(ahorroMayor(harina)).toBe(17);
+    expect(ahorroMayor(sal)).toBe(0);
+  });
+
+  it('cero si el precio al mayor no mejora el de la oferta', () => {
+    // fondant: oferta 5,78 y mayor 6,00
+    expect(ahorroMayor(fondant)).toBe(0);
+    expect(ahorroMayor({ ...fondant, precioMayorUsd: 5.5 })).toBe(28);
   });
 });

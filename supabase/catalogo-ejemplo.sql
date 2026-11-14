@@ -38,7 +38,7 @@ from (values
    'Leudante químico para masas más altas.', 1.90, null, null, null, false,
    'polvo hornear royal leudante'),
   ('fondant-blanco-1kg', 'Fondant blanco', 'reposteria', '1 kg',
-   'Listo para forrar y modelar tortas.', 6.80, 6.00, 5, 15, true,
+   'Listo para forrar y modelar tortas.', 6.80, 5.50, 5, 15, true,
    'fondant pasta cubrir torta decorar'),
   ('colorantes-gel-6', 'Colorantes en gel', 'reposteria', 'Set de 6',
    'Colores intensos que no aguan la crema.', 5.50, null, null, null, false,

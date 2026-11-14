@@ -1,0 +1,141 @@
+---
+// Ficha de producto (spec §4). Se genera en cada petición con el precio vigente.
+import Tienda from '../../layouts/Tienda.astro';
+import Buscador from '../../components/Buscador.astro';
+import Foto from '../../components/Foto.astro';
+import Icono from '../../components/Icono.astro';
+import Precio from '../../components/Precio.astro';
+import TarjetaProducto from '../../components/TarjetaProducto.astro';
+import { t } from '../../i18n';
+import { catalogoDelServidor } from '../../lib/catalogo-servidor';
+import { fotoProducto } from '../../lib/fotos';
+import { ahorroMayor, bolivares, formatoBs, formatoUsd, precioUnitario } from '../../lib/precios';
+import { enlaceWhatsApp, mensajeProducto, NUMERO_TIENDA } from '../../lib/whatsapp';
+
+export const prerender = false;
+
+const catalogo = await catalogoDelServidor();
+const producto = catalogo?.productos.find((p) => p.slug === Astro.params.slug);
+if (!catalogo) Astro.response.status = 503;
+else if (!producto) Astro.response.status = 404;
+
+const tasa = catalogo?.ajustes.tasaBcv ?? 1;
+const categoria = catalogo?.categorias.find((c) => c.slug === producto?.categoria);
+const relacionados = producto ? (catalogo?.productos ?? []).filter((p) => p.categoria === producto.categoria && p.slug !== producto.slug && p.disponible).slice(0, 4) : [];
+const foto = producto ? fotoProducto(producto.slug) : undefined;
+const pedir = producto?.disponible ? enlaceWhatsApp(mensajeProducto(producto, tasa), NUMERO_TIENDA) : null;
+const precio = producto ? precioUnitario(producto) : 0;
+
+const title = producto ? t('ficha.titulo-meta', { nombre: producto.nombre, presentacion: producto.presentacion }) : `${t('ficha.no-encontrado')} | ${t('sitio.nombre')}`;
+const description = producto
+  ? t('ficha.descripcion-meta', {
+      nombre: producto.nombre,
+      presentacion: producto.presentacion,
+      precio: formatoUsd(precio),
+      bs: formatoBs(bolivares(precio, tasa)),
+      descripcion: producto.descripcion,
+    })
+  : t('ficha.no-encontrado-texto');
+---
+
+<Tienda title={title} description={description} noindex={!producto} ajustes={catalogo?.ajustes} sinCatalogo={!catalogo}>
+  {
+    producto ? (
+      <>
+        <nav aria-label={t('ficha.ruta')} class="contenedor pt-6 text-sm">
+          <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-tinta-suave">
+            <li><a href="/" class="text-hoja-texto">{t('ficha.inicio')}</a></li>
+            <li aria-hidden="true">/</li>
+            <li><a href="/productos/" class="text-hoja-texto">{t('catalogo.titulo')}</a></li>
+            {categoria && (
+              <>
+                <li aria-hidden="true">/</li>
+                <li><a href={`/productos/?categoria=${categoria.slug}`} class="text-hoja-texto">{categoria.nombre}</a></li>
+              </>
+            )}
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" class="text-tinta">{producto.nombre}</li>
+          </ol>
+        </nav>
+
+        <section class="contenedor grid gap-8 py-8 md:grid-cols-2 md:items-start lg:gap-14 lg:py-12" aria-labelledby="ficha-titulo">
+          <div class="relative overflow-hidden rounded-tarjeta bg-superficie">
+            {foto && <Foto imagen={foto} alt={`${producto.nombre}, ${producto.presentacion}`} sizes="(min-width: 48rem) 45vw, 92vw" loading="eager" fetchpriority="high" class="aspect-square w-full object-cover" />}
+            {producto.ofertaPct && (
+              <span class="absolute top-4 left-4 rounded-full bg-aji px-3 py-1 font-bold text-tinta">{t('ofertas.descuento', { pct: String(producto.ofertaPct) })}</span>
+            )}
+          </div>
+
+          <div class="flex flex-col gap-5">
+            <div>
+              <h1 id="ficha-titulo" class="text-titulo font-bold">{producto.nombre}</h1>
+              <p class="mt-1 text-lg text-tinta-suave">{producto.presentacion}</p>
+            </div>
+            <Precio producto={producto} tasa={tasa} grande />
+            <p class:list={['inline-flex items-center gap-2 font-semibold', producto.disponible ? 'text-hoja-texto' : 'text-aji-texto']}>
+              <span class:list={['size-2.5 rounded-full', producto.disponible ? 'bg-hoja' : 'bg-aji']} aria-hidden="true" />
+              {producto.disponible ? t('ficha.disponible') : t('ficha.agotado')}
+            </p>
+            {producto.descripcion && <p class="max-w-[36rem] text-lg">{producto.descripcion}</p>}
+
+            {ahorroMayor(producto) > 0 && (
+              <div class="rounded-tarjeta bg-pradera p-5">
+                <p class="flex items-center gap-2 font-semibold text-monte">
+                  <Icono nombre="paquete" class="size-5" />
+                  {t('ficha.mayor-titulo')}
+                </p>
+                <p class="precio mt-1">
+                  {t('ficha.mayor-texto', {
+                    n: String(producto.minimoMayor),
+                    precio: formatoUsd(precioUnitario(producto, producto.minimoMayor ?? 1)),
+                    detal: formatoUsd(precio),
+                  })}
+                </p>
+              </div>
+            )}
+
+            {producto.disponible && (
+              <div class="flex flex-wrap gap-3">
+                <button type="button" data-anadir={producto.slug} hidden class="inline-flex items-center gap-2 rounded-full bg-maiz px-6 py-3 font-semibold text-tinta transition-transform duration-150 active:scale-95">
+                  <Icono nombre="cesta" class="size-5" />
+                  {t('ficha.anadir')}
+                </button>
+                {pedir && (
+                  <a href={pedir} class="inline-flex items-center gap-2 rounded-full bg-monte px-6 py-3 font-semibold text-papel no-underline transition-transform duration-150 active:scale-95">
+                    <Icono nombre="mensaje" class="size-5" />
+                    {t('ficha.pedir')}
+                  </a>
+                )}
+              </div>
+            )}
+            <a href="/#pregunta" class="inline-flex w-fit items-center gap-2 font-semibold text-hoja-texto no-underline hover:underline">
+              <Icono nombre="mensaje" class="size-5" />
+              {t('ficha.preguntar')}
+            </a>
+            <p class="precio text-sm text-tinta-suave">{t('ficha.aviso-precio', { tasa: formatoBs(Math.round(tasa * 100)) })}</p>
+          </div>
+        </section>
+
+        {relacionados.length > 0 && categoria && (
+          <section class="bg-superficie py-12 lg:py-16" aria-labelledby="relacionados-titulo">
+            <div class="contenedor">
+              <h2 id="relacionados-titulo" class="text-subtitulo font-bold">{t('ficha.relacionados', { categoria: categoria.nombre })}</h2>
+              <ul class="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+                {relacionados.map((p) => <li class="flex"><TarjetaProducto producto={p} tasa={tasa} /></li>)}
+              </ul>
+            </div>
+          </section>
+        )}
+      </>
+    ) : (
+      <section class="contenedor py-16 lg:py-24" aria-labelledby="no-encontrado">
+        <h1 id="no-encontrado" class="text-titulo font-bold">{t('ficha.no-encontrado')}</h1>
+        <p class="mt-4 max-w-[40rem] text-lg">{t('ficha.no-encontrado-texto')}</p>
+        <div class="mt-8">
+          <Buscador categorias={catalogo?.categorias ?? []} />
+        </div>
+        <a href="/productos/" class="mt-6 inline-flex font-semibold text-hoja-texto">{t('catalogo.ver-todo')}</a>
+      </section>
+    )
+  }
+</Tienda>
