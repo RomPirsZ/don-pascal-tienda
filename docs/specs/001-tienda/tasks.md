@@ -25,7 +25,7 @@
 - [x] E06 Catálogo con búsqueda y categorías (formulario GET) y ficha de producto — *hecha 2026-11-14: filtros por URL validados (`filtros.ts`: texto de 60 caracteres como máximo, categoría solo si existe, «solo al mayor»), estado vacío con salidas, ficha con precio en $ y Bs, al mayor, disponibilidad, migas y relacionados, 404 con buscador. Textos con la skill copywriting. «Al mayor» solo se ofrece si ahorra de verdad (`ahorroMayor`): el fondant de ejemplo tenía el mayor por encima de su precio de oferta y se corrigió. e2e 2 y 4 en `catalogo.spec.ts`, también sin JS*
 - [x] E07 Carrito y mensaje de WhatsApp + tests unitarios; e2e 1–4 y 7 + axe — *hecha 2026-11-14: `<dialog>` nativo (foco, Esc, fondo que cierra), cantidades de 1 a 99 con el precio al mayor automático desde el mínimo y la pista «Desde N: $ X c/u», total en $ y Bs, mensaje de WhatsApp con la tasa y la fecha; sin número configurado pasa a «Copiar pedido» con el mensaje plegado. localStorage validado (`normalizar`) y precios siempre recalculados con el catálogo, que viaja en un bloque JSON. axe sin violaciones serias en todas las páginas y con el carrito abierto (se corrigieron la `<dl>` de Visítanos y el nombre accesible del botón del carrito)*
 
-**Hecho cuando:** se compra de punta a punta desde el móvil, también sin JS.
+**Hecho cuando:** se compra de punta a punta desde el móvil, también sin JS. *Cerrada y revisada por el usuario el 2026-11-14 con el catálogo de ejemplo (adelantada a la Fase 1, que espera a Supabase en E03). Queda por comprobar el pedido sin JS por el botón «Pedir» de cada producto, que solo aparece con `PUBLIC_STORE_WHATSAPP`: se verifica al configurar el número (Fase 4).*
 
 ## Fase 3 — Asistente
 
