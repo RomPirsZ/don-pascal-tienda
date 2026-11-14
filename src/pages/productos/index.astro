@@ -27,7 +27,7 @@ const cantidad = productos.length === 1 ? t('catalogo.cantidad-uno') : t('catalo
 const chip = 'inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold no-underline transition-colors duration-150';
 ---
 
-<Tienda title={`${titulo} | ${t('sitio.nombre')}`} description={t('catalogo.descripcion')} ajustes={catalogo?.ajustes} sinCatalogo={!catalogo}>
+<Tienda title={`${titulo} | ${t('sitio.nombre')}`} description={t('catalogo.descripcion')} catalogo={catalogo}>
   <section class="bg-superficie py-10 lg:py-14" aria-labelledby="catalogo-titulo">
     <div class="contenedor">
       <h1 id="catalogo-titulo" class="text-titulo font-bold">{titulo}</h1>

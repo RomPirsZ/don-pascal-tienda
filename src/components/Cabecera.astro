@@ -32,11 +32,11 @@ const enlaces = [
         data-carrito-abrir
         hidden
         class="relative inline-flex items-center gap-2 rounded-full bg-maiz px-4 py-2.5 font-semibold text-tinta"
-        aria-label={t('nav.carrito-cantidad', { n: '0' })}
       >
         <Icono nombre="cesta" class="size-5" />
-        <span class="hidden sm:inline">{t('nav.carrito')}</span>
+        <span class="sr-only sm:not-sr-only">{t('nav.carrito')}</span>
         <span data-carrito-cantidad class="precio grid min-w-6 place-items-center rounded-full bg-tinta px-1.5 text-xs font-bold text-papel">0</span>
+        <span data-carrito-unidades-sr class="sr-only">{t('carrito.unidades-sr')}</span>
       </button>
 
       <details class="group relative md:hidden">

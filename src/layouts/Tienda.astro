@@ -2,26 +2,27 @@
 // Página de la tienda: cabecera, contenido y pie. Si el catálogo no cargó, muestra el aviso.
 import Base from './Base.astro';
 import Cabecera from '../components/Cabecera.astro';
+import Carrito from '../components/Carrito.astro';
 import Pie from '../components/Pie.astro';
 import { t } from '../i18n';
-import type { Ajustes } from '../lib/catalogo';
+import type { Catalogo } from '../lib/catalogo';
 
 interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
-  ajustes?: Ajustes | undefined;
-  /** El catálogo no se pudo leer: se muestra el aviso en lugar del contenido */
-  sinCatalogo?: boolean;
+  /** undefined si no se pudo leer: la página muestra el aviso en lugar del contenido */
+  catalogo: Catalogo | undefined;
 }
 
-const { ajustes, sinCatalogo = false, ...base } = Astro.props;
+const { catalogo, ...base } = Astro.props;
 ---
 
 <Base {...base}>
   <Cabecera />
   <main id="contenido">
-    {sinCatalogo ? <p class="contenedor py-24 text-lg">{t('catalogo.error')}</p> : <slot />}
+    {catalogo ? <slot /> : <p class="contenedor py-24 text-lg">{t('catalogo.error')}</p>}
   </main>
-  <Pie ajustes={ajustes} />
+  <Pie ajustes={catalogo?.ajustes} />
+  {catalogo && <Carrito catalogo={catalogo} />}
 </Base>

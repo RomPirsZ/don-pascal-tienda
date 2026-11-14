@@ -1,0 +1,118 @@
+---
+// Carrito (spec §4, plan §5): un <dialog> nativo (foco atrapado, Esc) que llena
+// src/scripts/carrito.ts. Sin JS no se muestra: cada producto se pide por WhatsApp.
+// Los precios viajan en un bloque JSON (no se ejecuta, la CSP no lo afecta) y se
+// recalculan siempre con lib/carrito.ts.
+import Icono from './Icono.astro';
+import { t } from '../i18n';
+import type { Catalogo } from '../lib/catalogo';
+import { fotoProducto } from '../lib/fotos';
+import { NUMERO_TIENDA } from '../lib/whatsapp';
+
+interface Props {
+  catalogo: Catalogo;
+}
+
+const { catalogo } = Astro.props;
+const datos = {
+  tasa: catalogo.ajustes.tasaBcv,
+  tasaFecha: catalogo.ajustes.tasaFecha,
+  numero: NUMERO_TIENDA,
+  productos: catalogo.productos.map((p) => ({
+    slug: p.slug,
+    nombre: p.nombre,
+    presentacion: p.presentacion,
+    precioUsd: p.precioUsd,
+    precioMayorUsd: p.precioMayorUsd,
+    minimoMayor: p.minimoMayor,
+    ofertaPct: p.ofertaPct,
+    disponible: p.disponible,
+    foto: fotoProducto(p.slug)?.src.replace('-360.webp', '-240.webp') ?? null,
+  })),
+};
+// `<` escapado: un texto del catálogo no puede cerrar el bloque
+const json = JSON.stringify(datos).replace(/</g, '\\u003c');
+---
+
+<script type="application/json" id="carrito-datos" set:html={json} />
+
+<dialog
+  id="carrito"
+  aria-labelledby="carrito-titulo"
+  class="m-0 ml-auto h-dvh max-h-dvh w-full max-w-md overflow-hidden bg-papel p-0 text-tinta backdrop:bg-tinta/50"
+>
+  <div class="flex h-full flex-col">
+    <header class="flex items-center justify-between gap-4 border-b border-linea px-5 py-4">
+      <h2 id="carrito-titulo" class="text-subtitulo font-bold">{t('carrito.titulo')}</h2>
+      <button type="button" data-carrito-cerrar class="grid size-11 place-items-center rounded-full hover:bg-superficie" aria-label={t('carrito.cerrar')}>
+        <Icono nombre="cerrar" class="size-6" />
+      </button>
+    </header>
+
+    <div data-carrito-vacio class="flex flex-1 flex-col items-start gap-3 px-5 py-8">
+      <p class="text-lg font-semibold">{t('carrito.vacio')}</p>
+      <p>{t('carrito.vacio-texto')}</p>
+      <a href="/productos/" class="mt-2 inline-flex rounded-full bg-maiz px-5 py-2.5 font-semibold text-tinta no-underline">{t('carrito.ver-productos')}</a>
+    </div>
+
+    <ul data-carrito-lista class="flex-1 divide-y divide-linea overflow-y-auto px-5" hidden></ul>
+
+    <footer data-carrito-pie class="border-t border-linea bg-superficie px-5 py-4" hidden>
+      <p data-carrito-omitidos class="mb-3 text-sm text-aji-texto" hidden>{t('carrito.omitidos')}</p>
+      <div class="flex items-baseline justify-between gap-4">
+        <p class="font-semibold">{t('carrito.total')} <span data-carrito-unidades class="font-normal text-tinta-suave"></span></p>
+        <p class="precio text-right">
+          <span data-carrito-total class="block text-precio font-bold"></span>
+          <span data-carrito-total-bs class="block text-sm text-tinta-suave"></span>
+        </p>
+      </div>
+      <p class="mt-2 text-sm text-tinta-suave">{t('carrito.aviso')}</p>
+      <div class="mt-4 flex flex-col gap-2">
+        <a data-carrito-enviar hidden class="inline-flex items-center justify-center gap-2 rounded-full bg-maiz px-5 py-3 font-semibold text-tinta no-underline">
+          <Icono nombre="mensaje" class="size-5" />
+          {t('carrito.enviar')}
+        </a>
+        <div data-carrito-copia hidden>
+          <p class="text-sm">{t('carrito.sin-numero')}</p>
+          <details class="mt-1">
+            <summary class="cursor-pointer py-1 text-sm font-semibold text-hoja-texto">{t('carrito.ver-mensaje')}</summary>
+            <pre data-carrito-mensaje class="mt-1 max-h-40 overflow-auto rounded-control bg-papel p-3 font-sans text-sm whitespace-pre-wrap"></pre>
+          </details>
+          <button type="button" data-carrito-copiar class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-maiz px-5 py-3 font-semibold text-tinta">
+            {t('carrito.copiar')}
+          </button>
+        </div>
+        <p data-carrito-estado role="status" class="text-sm text-hoja-texto"></p>
+        <button type="button" data-carrito-vaciar class="self-start py-2 text-sm font-semibold text-tinta-suave underline underline-offset-4">{t('carrito.vaciar')}</button>
+      </div>
+    </footer>
+  </div>
+</dialog>
+
+<template id="carrito-linea">
+  <li class="flex gap-3 py-4">
+    <img data-foto alt="" width="64" height="64" class="size-16 shrink-0 rounded-control bg-superficie object-cover" />
+    <div class="flex min-w-0 flex-1 flex-col gap-1">
+      <p data-nombre class="font-semibold leading-snug"></p>
+      <p data-presentacion class="text-sm text-tinta-suave"></p>
+      <p data-mayor class="w-fit rounded-full bg-pradera px-2 py-0.5 text-xs font-semibold text-monte" hidden>{t('carrito.al-mayor')}</p>
+      <p data-pista class="text-xs text-tinta-suave" hidden></p>
+      <div class="mt-1 flex items-center justify-between gap-3">
+        <div class="flex items-center rounded-full border border-tinta-suave">
+          <button type="button" data-accion="menos" class="grid size-9 place-items-center rounded-full hover:bg-superficie"><Icono nombre="menos" class="size-4" /></button>
+          <span data-cantidad class="precio min-w-8 text-center font-semibold"></span>
+          <button type="button" data-accion="mas" class="grid size-9 place-items-center rounded-full hover:bg-superficie"><Icono nombre="mas" class="size-4" /></button>
+        </div>
+        <p data-subtotal class="precio font-bold"></p>
+      </div>
+    </div>
+    <button type="button" data-accion="quitar" class="grid size-9 shrink-0 place-items-center self-start rounded-full text-tinta-suave hover:bg-superficie"><Icono nombre="cerrar" class="size-4" /></button>
+  </li>
+</template>
+
+<p data-carrito-anuncio aria-live="polite" class="sr-only"></p>
+
+<script>
+  import { iniciarCarrito } from '../scripts/carrito';
+  iniciarCarrito();
+</script>

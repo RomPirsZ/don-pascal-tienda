@@ -21,7 +21,7 @@ if (!catalogo) Astro.response.status = 503;
 const disponibles = catalogo?.productos.filter((p) => p.disponible) ?? [];
 ---
 
-<Tienda ajustes={catalogo?.ajustes} sinCatalogo={!catalogo}>
+<Tienda catalogo={catalogo}>
     {
       catalogo && (
         <>

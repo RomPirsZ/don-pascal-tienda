@@ -38,7 +38,7 @@ const description = producto
   : t('ficha.no-encontrado-texto');
 ---
 
-<Tienda title={title} description={description} noindex={!producto} ajustes={catalogo?.ajustes} sinCatalogo={!catalogo}>
+<Tienda title={title} description={description} noindex={!producto} catalogo={catalogo}>
   {
     producto ? (
       <>

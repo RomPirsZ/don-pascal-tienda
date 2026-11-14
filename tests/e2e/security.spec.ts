@@ -47,6 +47,6 @@ test('el HTML no lleva scripts ni estilos inline que la CSP bloquearía', async 
   const violaciones: string[] = [];
   page.on('console', (mensaje) => /Content Security Policy/i.test(mensaje.text()) && violaciones.push(mensaje.text()));
   await page.goto('/');
-  expect(await page.locator('script:not([src]):not([type="application/ld+json"])').count()).toBe(0);
+  expect(await page.locator('script:not([src]):not([type="application/ld+json"]):not([type="application/json"])').count()).toBe(0);
   expect(violaciones).toEqual([]);
 });
