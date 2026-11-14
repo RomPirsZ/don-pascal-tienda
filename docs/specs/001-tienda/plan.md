@@ -22,11 +22,11 @@
 
 El del portafolio, con las mismas versiones fijadas (se revisan en E01 contra `npm audit` y la regla de antigüedad de `.npmrc`):
 - `astro` 7.4.7 con `@astrojs/cloudflare` 14.4.3 (`output: 'server'`, con las páginas del catálogo prerenderizadas cuando se pueda);
-- `wrangler` 4.154.0;
+- `wrangler` 4.156.1: la versión exacta que fija `@cloudflare/vite-plugin` 1.67.0 dentro del adaptador (un solo wrangler en el árbol; lo vigila `tests/unit/dependencies.test.ts`). El portafolio sigue en 4.154.0 porque su lockfile tiene el plugin 1.66.0;
 - `@tailwindcss/vite` y `tailwindcss` 4.3.3;
 - `@fontsource/poppins` 5.3.0, pesos 300, 400, 600 y 700, servidos desde el sitio;
 - `gsap` 3.15.0 solo si el movimiento de E14 lo necesita; si bastan CSS y `IntersectionObserver`, no se añade;
-- **nuevo: `@anthropic-ai/sdk`**, la versión estable más reciente con al menos dos semanas, fijada;
+- **nuevo: `@anthropic-ai/sdk`**, la versión estable más reciente con al menos dos semanas, fijada. Se instala en E09, cuando se usa, comprobando que sus tipos admiten `fallbacks`;
 - desarrollo: `typescript` 6.0.3, `@astrojs/check`, `vitest` 5.0.5, `@playwright/test` 1.64.1, `@axe-core/playwright` 4.14.0.
 
 Se copian del portafolio (`../sdd-portafolio/`) y se adaptan:

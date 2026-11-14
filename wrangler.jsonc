@@ -1,0 +1,17 @@
+// Cloudflare Workers (plan §2). El adaptador de Astro completa el resto: el directorio del
+// build estático y, cuando haya rutas de servidor, `main` y `ASSETS`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "don-pascal",
+  // Fecha fija: el comportamiento del runtime no cambia sin decidirlo
+  "compatibility_date": "2026-10-23",
+  "workers_dev": true,
+  "preview_urls": false,
+  // Logs del Worker (solo códigos y eventos, nunca lo que escribe el cliente) sin los de
+  // invocación, que guardan la URL, las cabeceras y la IP de cada petición
+  "observability": { "enabled": true, "logs": { "invocation_logs": false } },
+  "assets": {
+    // Una ruta que no existe recibe 404.html con estado 404
+    "not_found_handling": "404-page"
+  }
+}

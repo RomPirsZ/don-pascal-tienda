@@ -12,7 +12,7 @@
 
 ## Fase 1 — Base
 
-- [ ] E01 Proyecto Astro + Cloudflare + Tailwind + TypeScript estricto con las dependencias del plan §2; `wrangler.jsonc`, `_headers`, middleware y cabeceras del servidor; Vitest, Playwright y `npm test`; CI
+- [x] E01 Proyecto Astro + Cloudflare + Tailwind + TypeScript estricto con las dependencias del plan §2; `wrangler.jsonc`, `_headers`, middleware y cabeceras del servidor; Vitest, Playwright y `npm test`; CI — *base copiada del portafolio (cabeceras, middleware, tests de dependencias y de `wrangler.jsonc`, CI y Dependabot); `wrangler` 4.156.1 para alinearlo con el plugin del adaptador; sin URL de vista previa; e2e en el puerto 4349; las ilustraciones pasan a `src/assets/don-pascal/`*
 - [ ] E02 Tokens de la dirección en `global.css` + test de contraste; fuentes; `Base.astro`
 - [ ] E03 `supabase/tienda.sql` y `catalogo-ejemplo.sql` (unos 30 productos genéricos con fotos libres y créditos); RLS verificada con la API; `keepalive`
 
@@ -31,7 +31,7 @@
 
 - [ ] E08 `price-guard.ts` + tests unitarios (primero los tests)
 - [ ] E09 Herramientas, instrucciones y bucle con Claude (`claude.ts`) + tests con Claude simulado
-- [ ] E10 `/api/chat`: Turnstile, límite por IP, tope diario (`chat_uso`), errores + tests de integración
+- [ ] E10 `/api/chat`: Turnstile, límite por IP, tope diario (`chat_uso`), errores + tests de integración; e2e de las cabeceras del servidor (`src/middleware.ts`)
 - [ ] E11 Widget de chat accesible (diálogo, `aria-live`, teclado, aviso de IA, sin JS → WhatsApp); e2e 5
 - [ ] E12 Batería de preguntas trampa contra la API real, con el coste aprobado antes; ajustes de las instrucciones si hace falta
 
