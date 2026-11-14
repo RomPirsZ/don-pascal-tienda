@@ -66,7 +66,7 @@ supabase/tienda.sql, supabase/catalogo-ejemplo.sql, supabase/keepalive.sql
 
 `supabase/tienda.sql` es la fuente única del esquema:
 - `categorias(id, slug, nombre, orden)`;
-- `productos(id, slug, nombre, categoria_id, presentacion, precio_usd numeric(10,2), precio_mayor_usd, unidad_mayor, disponible, oferta_pct, destacado, imagen, credito_imagen, palabras_clave)`;
+- `productos(id, slug, nombre, categoria_id, presentacion, descripcion, precio_usd numeric(10,2), precio_mayor_usd, minimo_mayor, oferta_pct, disponible, destacado, palabras_clave)`. Las fotos no van en la tabla: viven en `src/assets/productos/<slug>.jpg` para que el build las optimice;
 - `ajustes(clave, valor)`: `tasa_bcv` y su fecha, horario, dirección ficticia, WhatsApp de la tienda.
 
 Permisos:
@@ -75,6 +75,10 @@ Permisos:
 - Tope del asistente: tabla `chat_uso(id, creado)`. `anon` solo puede insertar sin columnas propias, y una función `chat_count_24h()` (`security definer`, como `leads_count_24h` del portafolio) devuelve el número de respuestas en 24 horas.
 
 La tasa BCV es un valor de ejemplo guardado en `ajustes`, rotulado como tal. Leerla en vivo del BCV queda fuera de esta versión.
+
+**Lectura (`src/lib/catalogo.ts`, E04):** las páginas se generan en cada petición y leen las tres tablas con la API REST. El resultado se guarda un minuto en memoria del Worker. Si Supabase falla, la página muestra un aviso y remite a WhatsApp; nunca enseña los precios de ejemplo como si fueran los reales. Sin `SUPABASE_URL` (desarrollo y CI) se usa `src/data/catalogo-ejemplo.ts`, el mismo catálogo del SQL; un test vigila que coincidan.
+
+**Búsqueda:** en memoria, sobre el catálogo ya leído (33 productos), con la misma función para la web y para el asistente: minúsculas, sin tildes, todas las palabras tienen que aparecer y una raíz simple para los plurales.
 
 ## 5. Tienda
 

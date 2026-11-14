@@ -20,7 +20,7 @@
 
 ## Fase 2 — Tienda
 
-- [ ] E04 `precios.ts` y `catalogo.ts` + tests unitarios (primero los tests)
+- [x] E04 `precios.ts` y `catalogo.ts` + tests unitarios (primero los tests) — *adelantada a petición del usuario (2026-11-14) con el catálogo de ejemplo en local mientras se crea Supabase. Precios en centavos enteros (oferta, mayor y Bs en una sola fórmula, formato es-VE); catálogo con caché de un minuto, validación de cada fila y error si Supabase falla; búsqueda sin tildes ni plurales. 33 fotos de producto generadas por el usuario con Nano Banana y recortadas, con su procedencia incrustada*
 - [ ] E05 Inicio según la dirección: cabecera, hero con Don Pascal y buscador, ofertas, categorías, los más pedidos, al mayor, cómo pedir, visítanos y pie; revisión temprana con capturas (design-taste-frontend, solo su revisión)
 - [ ] E06 Catálogo con búsqueda y categorías (formulario GET) y ficha de producto
 - [ ] E07 Carrito y mensaje de WhatsApp + tests unitarios; e2e 1–4 y 7 + axe

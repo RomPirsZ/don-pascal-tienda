@@ -27,11 +27,6 @@ create table public.productos (
   disponible boolean not null default true,
   destacado boolean not null default false,
   palabras_clave text not null default '' check (char_length(palabras_clave) <= 200),
-  -- Texto de búsqueda en minúsculas y sin tildes (translate y lower son inmutables)
-  busqueda text generated always as (
-    lower(translate(nombre || ' ' || presentacion || ' ' || palabras_clave,
-      'ÁÉÍÓÚÜÑáéíóúüñ', 'AEIOUUNaeiouun'))
-  ) stored,
   -- Precio y mínimo al mayor van juntos
   check ((precio_mayor_usd is null) = (minimo_mayor is null))
 );
