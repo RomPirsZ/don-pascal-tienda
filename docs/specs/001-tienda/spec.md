@@ -55,7 +55,7 @@ Es una pieza de portafolio: tiene que funcionar de verdad para el cliente de la 
    - el aviso de concepto, discreto pero visible sin hacer scroll.
 3. **Ofertas:** rejilla de banners de color con el producto recortado, el descuento y «Añadir». Las ofertas son ficticias como el resto del catálogo, y no hay cuentas atrás.
 4. **Categorías:** repostería, panadería, víveres, charcutería, bebidas y limpieza, como fichas que llevan al catálogo filtrado.
-5. **Los más pedidos:** tarjetas de producto con precio en $ y Bs y «Añadir».
+5. **Recomendados de Don Pascal:** tarjetas de producto con precio en $ y Bs y «Añadir». *(No «los más pedidos»: no hay datos de ventas y sería una cifra inventada.)*
 6. **Al mayor:** bloque para emprendedores (reposteros, panaderos, pizzerías) con las presentaciones grandes y cómo pedir volumen.
 7. **Cómo pedir:** 3 pasos: arma tu carrito → envíalo por WhatsApp → retira en la tienda o coordina la entrega.
 8. **Pregúntale a Don Pascal:** presenta el asistente (web y WhatsApp) con ejemplos de preguntas.

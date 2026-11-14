@@ -1,0 +1,47 @@
+---
+// Banners de oferta (contrato: rejilla en amarillo, naranja y verde). Sin cuentas atrás.
+import Foto from './Foto.astro';
+import Precio from './Precio.astro';
+import { t } from '../i18n';
+import type { Producto } from '../lib/catalogo';
+import { fotoProducto } from '../lib/fotos';
+
+interface Props {
+  productos: Producto[];
+  tasa: number;
+}
+
+const { productos, tasa } = Astro.props;
+const fondos = ['bg-maiz', 'bg-aji', 'bg-hoja', 'bg-pradera'];
+---
+
+<section id="ofertas" class="contenedor py-16 lg:py-20" aria-labelledby="ofertas-titulo">
+  <h2 id="ofertas-titulo" class="text-titulo font-bold">{t('ofertas.titulo')}</h2>
+  <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+    {
+      productos.map((p, i) => {
+        const foto = fotoProducto(p.slug);
+        return (
+          <li class:list={['group relative flex items-center gap-4 overflow-hidden rounded-tarjeta p-5 text-tinta sm:p-6', fondos[i % fondos.length]]}>
+            <div class="flex min-w-0 flex-1 flex-col gap-2">
+              <p class="text-4xl font-bold tracking-tight sm:text-5xl">{t('ofertas.descuento', { pct: String(p.ofertaPct) })}</p>
+              <h3 class="text-lg font-semibold">
+                <a href={`/productos/${p.slug}/`} class="no-underline after:absolute after:inset-0">{p.nombre}</a>
+              </h3>
+              <p class="text-sm">{p.presentacion}</p>
+              <Precio producto={p} tasa={tasa} claseUsd="text-tinta" claseBs="text-tinta" />
+            </div>
+            {foto && (
+              <Foto
+                imagen={foto}
+                alt=""
+                sizes="(min-width: 40rem) 12rem, 38vw"
+                class="aspect-square w-[38%] max-w-48 shrink-0 rounded-control object-cover shadow-tarjeta transition-transform duration-300 group-hover:-rotate-2 group-hover:scale-[1.03]"
+              />
+            )}
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>

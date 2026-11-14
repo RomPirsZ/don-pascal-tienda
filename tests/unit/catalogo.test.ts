@@ -162,3 +162,13 @@ describe('búsqueda', () => {
     expect(slugs('iphone')).toEqual([]);
   });
 });
+
+describe('imágenes preparadas (scripts/imagenes.sh)', () => {
+  it('cada producto del catálogo tiene sus tres anchos en WebP', () => {
+    for (const { slug } of CATALOGO_EJEMPLO.productos) {
+      for (const ancho of [240, 360, 480]) {
+        expect(() => readFileSync(`public/img/productos/${slug}-${ancho}.webp`), `${slug}-${ancho}`).not.toThrow();
+      }
+    }
+  });
+});

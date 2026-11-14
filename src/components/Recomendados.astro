@@ -1,0 +1,40 @@
+---
+import Icono from './Icono.astro';
+import TarjetaProducto from './TarjetaProducto.astro';
+import { t } from '../i18n';
+import type { Producto } from '../lib/catalogo';
+
+interface Props {
+  productos: Producto[];
+  total: number;
+  tasa: number;
+}
+
+const { productos, total, tasa } = Astro.props;
+---
+
+<section class="contenedor py-16 lg:py-20" aria-labelledby="recomendados-titulo">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <h2 id="recomendados-titulo" class="text-titulo font-bold">{t('recomendados.titulo')}</h2>
+    <a href="/productos/" class="inline-flex items-center gap-2 font-semibold text-hoja-texto no-underline hover:underline">
+      {t('recomendados.todo', { n: String(total) })}
+      <Icono nombre="flecha" class="size-5" />
+    </a>
+  </div>
+  <ul class="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+    {productos.map((p) => <li class="flex"><TarjetaProducto producto={p} tasa={tasa} /></li>)}
+    {
+      productos.length % 4 !== 0 && (
+        <li class="col-span-2 flex lg:col-span-1">
+          <a
+            href="/productos/"
+            class="sobre-monte flex w-full flex-col justify-between gap-6 rounded-tarjeta bg-monte p-6 text-papel no-underline shadow-tarjeta transition-shadow duration-200 hover:shadow-flotante"
+          >
+            <span class="text-subtitulo font-semibold">{t('recomendados.todo', { n: String(total) })}</span>
+            <span class="grid size-12 place-items-center rounded-full bg-maiz text-tinta"><Icono nombre="flecha" class="size-6" /></span>
+          </a>
+        </li>
+      )
+    }
+  </ul>
+</section>

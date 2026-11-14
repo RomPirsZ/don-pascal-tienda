@@ -1,0 +1,50 @@
+---
+import Foto from './Foto.astro';
+import { t } from '../i18n';
+import type { Categoria, Producto } from '../lib/catalogo';
+import { fotoProducto } from '../lib/fotos';
+
+interface Props {
+  categorias: Categoria[];
+  productos: Producto[];
+}
+
+const { categorias, productos } = Astro.props;
+// La foto de cada categoría: su primer producto destacado o, si no hay, el primero
+const portada = (slug: string) => {
+  const suyos = productos.filter((p) => p.categoria === slug);
+  return { foto: fotoProducto((suyos.find((p) => p.destacado) ?? suyos[0])?.slug ?? ''), cantidad: suyos.length };
+};
+---
+
+<section class="bg-pradera py-16 lg:py-20" aria-labelledby="categorias-titulo">
+  <div class="contenedor">
+    <h2 id="categorias-titulo" class="text-titulo font-bold text-monte">{t('categorias.titulo')}</h2>
+    <ul class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      {
+        categorias.map((c) => {
+          const { foto, cantidad } = portada(c.slug);
+          return (
+            <li>
+              <a
+                href={`/productos/?categoria=${c.slug}`}
+                class="group flex h-full flex-col items-center gap-3 rounded-tarjeta bg-papel p-3 pb-4 text-center no-underline shadow-tarjeta transition-shadow duration-200 hover:shadow-flotante"
+              >
+                {foto && (
+                  <Foto
+                    imagen={foto}
+                    alt=""
+                    sizes="(min-width: 64rem) 10rem, 44vw"
+                    class="aspect-square w-full rounded-control object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                  />
+                )}
+                <span class="font-semibold">{c.nombre}</span>
+                <span class="text-sm text-tinta-suave">{t('categorias.cantidad', { n: String(cantidad) })}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>

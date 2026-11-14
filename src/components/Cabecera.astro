@@ -1,0 +1,55 @@
+---
+import Foto from './Foto.astro';
+import Icono from './Icono.astro';
+import { t } from '../i18n';
+import { AVATAR } from '../lib/fotos';
+
+const enlaces = [
+  { href: '/productos/', texto: t('nav.productos') },
+  { href: '/#ofertas', texto: t('nav.ofertas') },
+  { href: '/#al-mayor', texto: t('nav.mayor') },
+  { href: '/#como-pedir', texto: t('nav.como-pedir') },
+];
+---
+
+<header class="sobre-monte bg-monte text-papel">
+  <div class="contenedor flex h-18 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-3 no-underline" aria-label={t('nav.inicio')}>
+      <Foto imagen={AVATAR} alt="" sizes="2.75rem" class="size-11 rounded-full bg-monte-claro object-cover" loading="eager" />
+      <span class="text-xl font-bold tracking-tight">{t('sitio.nombre')}</span>
+    </a>
+
+    <nav aria-label={t('nav.principal')} class="hidden md:block">
+      <ul class="flex items-center gap-7 text-base font-semibold">
+        {enlaces.map((e) => <li><a href={e.href} class="no-underline decoration-maiz decoration-2 hover:underline">{e.texto}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- El carrito necesita JS (E07): sin JS cada producto se pide por WhatsApp -->
+      <button
+        type="button"
+        data-carrito-abrir
+        hidden
+        class="relative inline-flex items-center gap-2 rounded-full bg-maiz px-4 py-2.5 font-semibold text-tinta"
+        aria-label={t('nav.carrito-cantidad', { n: '0' })}
+      >
+        <Icono nombre="cesta" class="size-5" />
+        <span class="hidden sm:inline">{t('nav.carrito')}</span>
+        <span data-carrito-cantidad class="precio grid min-w-6 place-items-center rounded-full bg-tinta px-1.5 text-xs font-bold text-papel">0</span>
+      </button>
+
+      <details class="group relative md:hidden">
+        <summary class="grid size-11 cursor-pointer list-none place-items-center rounded-full bg-monte-claro [&::-webkit-details-marker]:hidden" aria-label={t('nav.menu')}>
+          <Icono nombre="menu" class="size-6 group-open:hidden" />
+          <Icono nombre="cerrar" class="hidden size-6 group-open:block" />
+        </summary>
+        <nav aria-label={t('nav.principal')} class="absolute top-14 right-0 z-40 w-60 rounded-tarjeta bg-papel p-2 text-tinta shadow-flotante">
+          <ul class="flex flex-col">
+            {enlaces.map((e) => <li><a href={e.href} class="block rounded-control px-4 py-3 font-semibold no-underline hover:bg-superficie">{e.texto}</a></li>)}
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,39 @@
+---
+// Presenta el asistente (spec §6). El chat de la web llega en E11; hasta entonces, y siempre
+// sin JS, la acción es escribir por WhatsApp si la tienda tiene número.
+import Foto from './Foto.astro';
+import Icono from './Icono.astro';
+import { t } from '../i18n';
+import { enlaceWhatsApp, NUMERO_TIENDA } from '../lib/whatsapp';
+import { AVATAR } from '../lib/fotos';
+
+const whatsapp = enlaceWhatsApp('Hola, Don Pascal. Tengo una pregunta:', NUMERO_TIENDA);
+const ejemplos = [t('pregunta.ejemplo1'), t('pregunta.ejemplo2'), t('pregunta.ejemplo3')];
+---
+
+<section id="pregunta" class="bg-superficie py-16 lg:py-20" aria-labelledby="pregunta-titulo">
+  <div class="contenedor grid items-center gap-10 md:grid-cols-[auto_minmax(0,1fr)]">
+    <Foto
+      imagen={AVATAR}
+      alt={t('pregunta.avatar-alt')}
+      sizes="(min-width: 48rem) 14rem, 10rem"
+      class="mx-auto size-40 rounded-full bg-hoja object-cover shadow-flotante md:size-56"
+    />
+    <div>
+      <h2 id="pregunta-titulo" class="text-titulo font-bold">{t('pregunta.titulo')}</h2>
+      <p class="mt-4 max-w-[40rem] text-lg">{t('pregunta.texto')}</p>
+      <ul class="mt-6 flex flex-wrap gap-2">
+        {ejemplos.map((e) => <li class="rounded-full rounded-bl-md bg-papel px-4 py-2 text-sm shadow-tarjeta">{e}</li>)}
+      </ul>
+      {
+        whatsapp && (
+          <a href={whatsapp} class="mt-8 inline-flex items-center gap-2 rounded-full bg-monte px-6 py-3 font-semibold text-papel no-underline transition-transform duration-150 active:scale-95">
+            <Icono nombre="mensaje" class="size-5" />
+            {t('pregunta.whatsapp')}
+          </a>
+        )
+      }
+      <p class="mt-4 text-sm text-tinta-suave">{t('pregunta.aviso-ia')}</p>
+    </div>
+  </div>
+</section>

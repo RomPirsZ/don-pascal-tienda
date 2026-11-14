@@ -1,0 +1,28 @@
+---
+// <img> con srcset de las imágenes preparadas en public/img/ (lib/fotos.ts).
+import type { Imagen } from '../lib/fotos';
+
+interface Props {
+  imagen: Imagen;
+  alt: string;
+  sizes: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'auto';
+}
+
+const { imagen, alt, sizes, class: clase, loading = 'lazy', fetchpriority = 'auto' } = Astro.props;
+---
+
+<img
+  src={imagen.src}
+  srcset={imagen.srcset}
+  sizes={sizes}
+  width={imagen.width}
+  height={imagen.height}
+  alt={alt}
+  loading={loading}
+  decoding="async"
+  fetchpriority={fetchpriority}
+  class={clase}
+/>

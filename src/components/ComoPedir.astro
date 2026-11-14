@@ -1,0 +1,30 @@
+---
+import Icono from './Icono.astro';
+import { t } from '../i18n';
+
+const pasos = [
+  { icono: 'cesta', titulo: t('como.paso1.titulo'), texto: t('como.paso1.texto') },
+  { icono: 'mensaje', titulo: t('como.paso2.titulo'), texto: t('como.paso2.texto') },
+  { icono: 'camion', titulo: t('como.paso3.titulo'), texto: t('como.paso3.texto') },
+] as const;
+---
+
+<section id="como-pedir" class="contenedor py-16 lg:py-20" aria-labelledby="como-titulo">
+  <h2 id="como-titulo" class="text-titulo font-bold">{t('como.titulo')}</h2>
+  <ol class="mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
+    {
+      pasos.map((p, i) => (
+        <li class="relative flex gap-4 md:flex-col">
+          <span class="relative grid size-14 shrink-0 place-items-center rounded-full bg-pradera text-monte">
+            <Icono nombre={p.icono} class="size-6" />
+            <span class="precio absolute -top-1 -right-1 grid size-6 place-items-center rounded-full bg-maiz text-xs font-bold text-tinta" aria-hidden="true">{i + 1}</span>
+          </span>
+          <div>
+            <h3 class="text-subtitulo font-semibold">{p.titulo}</h3>
+            <p class="mt-2 max-w-[28rem]">{p.texto}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>

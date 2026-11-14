@@ -41,9 +41,9 @@ export interface Catalogo {
 
 interface Opciones {
   /** URL del proyecto (https://<ref>.supabase.co) */
-  url?: string;
+  url?: string | undefined;
   /** Clave publishable; nunca la secreta */
-  key?: string;
+  key?: string | undefined;
   /** Inyectables para los tests */
   fetch?: typeof globalThis.fetch;
   ahora?: () => number;

@@ -1,0 +1,46 @@
+---
+// Buscador del catálogo (spec §4): formulario GET a /productos/, funciona sin JS.
+import Icono from './Icono.astro';
+import { t } from '../i18n';
+import type { Categoria } from '../lib/catalogo';
+
+interface Props {
+  categorias: Categoria[];
+  texto?: string;
+  categoria?: string;
+  /** Sobre el monte del hero o sobre papel */
+  sobreMonte?: boolean;
+}
+
+const { categorias, texto = '', categoria = '', sobreMonte = false } = Astro.props;
+---
+
+<form action="/productos/" method="get" role="search" class="flex w-full max-w-xl flex-col gap-2 rounded-tarjeta bg-papel p-2 shadow-flotante sm:flex-row sm:items-center sm:rounded-full">
+  <label class="sr-only" for="buscador-categoria">{t('buscador.categoria')}</label>
+  <div class="relative sm:w-36">
+    <select
+      id="buscador-categoria"
+      name="categoria"
+      class="w-full appearance-none rounded-full border border-tinta-suave bg-papel py-2.5 pr-9 pl-4 text-sm font-semibold text-tinta sm:border-0 sm:border-r sm:rounded-none sm:rounded-l-full"
+    >
+      <option value="">{t('buscador.todas')}</option>
+      {categorias.map((c) => <option value={c.slug} selected={c.slug === categoria}>{c.nombre}</option>)}
+    </select>
+    <Icono nombre="abajo" class="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-tinta-suave" />
+  </div>
+  <label class="sr-only" for="buscador-texto">{t('buscador.etiqueta')}</label>
+  <input
+    id="buscador-texto"
+    name="q"
+    type="search"
+    value={texto}
+    placeholder={t('buscador.placeholder')}
+    autocomplete="off"
+    maxlength="60"
+    class="min-w-0 flex-1 rounded-full border border-tinta-suave bg-papel px-4 py-2.5 text-tinta placeholder:text-tinta-suave sm:border-0"
+  />
+  <button type="submit" class:list={['inline-flex items-center justify-center gap-2 rounded-full bg-maiz px-6 py-2.5 font-semibold text-tinta transition-transform duration-150 active:scale-95', sobreMonte && 'shadow-tarjeta']}>
+    <Icono nombre="buscar" class="size-5" />
+    {t('buscador.boton')}
+  </button>
+</form>

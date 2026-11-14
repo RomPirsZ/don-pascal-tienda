@@ -1,0 +1,57 @@
+---
+import Foto from './Foto.astro';
+import Buscador from './Buscador.astro';
+import Icono from './Icono.astro';
+import { t } from '../i18n';
+import type { Categoria } from '../lib/catalogo';
+import { formatoBs } from '../lib/precios';
+import { DON_PASCAL } from '../lib/fotos';
+
+interface Props {
+  categorias: Categoria[];
+  tasa: number;
+}
+
+const { categorias, tasa } = Astro.props;
+---
+
+<section class="sobre-monte relative overflow-hidden bg-monte text-papel" aria-labelledby="hero-titulo">
+  <div class="contenedor grid items-center gap-8 pt-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-6 lg:pt-12">
+    <div class="pb-2 lg:pb-20">
+      <h1 id="hero-titulo" class="text-hero leading-[1.05] tracking-[-0.03em]">
+        <span class="block font-bold">{t('hero.titulo-fuerte')}</span>
+        <span class="block font-light text-pradera">{t('hero.titulo-ligero')}</span>
+      </h1>
+      <p class="mt-5 max-w-[34rem] text-lg text-sobre-monte-suave">{t('hero.apoyo')}</p>
+      <div class="mt-8">
+        <Buscador categorias={categorias} sobreMonte />
+      </div>
+      <a href="#pregunta" class="mt-4 inline-flex items-center gap-2 font-semibold text-maiz no-underline hover:underline">
+        <Icono nombre="mensaje" class="size-5" />
+        {t('hero.pregunta')}
+      </a>
+      <p class="precio mt-6 max-w-[34rem] text-sm text-sobre-monte-suave">{t('aviso.concepto-tasa', { tasa: formatoBs(Math.round(tasa * 100)) })}</p>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-[26rem] self-end lg:max-w-none">
+      <!-- Arco detrás de Don Pascal -->
+      <div class="absolute inset-x-[6%] top-[12%] bottom-0 rounded-t-full bg-monte-claro" aria-hidden="true"></div>
+      <Foto
+        imagen={DON_PASCAL}
+        alt={t('hero.imagen-alt')}
+        sizes="(min-width: 64rem) 21rem, (min-width: 40rem) 17rem, 12rem"
+        loading="eager"
+        fetchpriority="high"
+        class="relative mx-auto h-[20rem] w-auto object-contain object-top sm:h-[30rem] lg:h-[36rem]"
+      />
+      <p class="absolute top-[46%] left-0 flex sm:top-[22%] items-center gap-2 rounded-full bg-papel py-2 pr-4 pl-2 text-sm font-semibold text-tinta shadow-flotante sm:left-0">
+        <span class="grid size-8 place-items-center rounded-full bg-hoja"><Icono nombre="paquete" class="size-4" /></span>
+        {t('hero.insignia-mayor')}
+      </p>
+      <p class="absolute right-0 bottom-[6%] flex sm:bottom-[14%] items-center gap-2 rounded-full bg-papel py-2 pr-4 pl-2 text-sm font-semibold text-tinta shadow-flotante">
+        <span class="grid size-8 place-items-center rounded-full bg-maiz"><Icono nombre="reloj" class="size-4" /></span>
+        {t('hero.insignia-horario')}
+      </p>
+    </div>
+  </div>
+</section>

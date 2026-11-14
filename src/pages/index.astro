@@ -1,11 +1,54 @@
 ---
-// Inicio provisional (E02): la página real llega en E05 con la dirección de .impeccable/surfaces/
+// Inicio (spec §5, contrato en .impeccable/surfaces/src-pages-index-astro.md). Se genera en
+// cada petición para mostrar los precios vigentes (plan §4).
+import { env } from 'cloudflare:workers';
 import Base from '../layouts/Base.astro';
+import AlMayor from '../components/AlMayor.astro';
+import Cabecera from '../components/Cabecera.astro';
+import Categorias from '../components/Categorias.astro';
+import ComoPedir from '../components/ComoPedir.astro';
+import Hero from '../components/Hero.astro';
+import Ofertas from '../components/Ofertas.astro';
+import Pie from '../components/Pie.astro';
+import Pregunta from '../components/Pregunta.astro';
+import Recomendados from '../components/Recomendados.astro';
+import Visitanos from '../components/Visitanos.astro';
 import { t } from '../i18n';
+import { leerCatalogo, type Catalogo } from '../lib/catalogo';
+import { tieneMayor } from '../lib/precios';
+
+export const prerender = false;
+
+let catalogo: Catalogo | undefined;
+try {
+  catalogo = await leerCatalogo({ url: env['SUPABASE_URL'] as string | undefined, key: env['SUPABASE_PUBLISHABLE_KEY'] as string | undefined });
+} catch (error) {
+  console.error(JSON.stringify({ evento: 'catalogo-error', motivo: error instanceof Error ? error.message : 'desconocido' }));
+  Astro.response.status = 503;
+}
+
+const disponibles = catalogo?.productos.filter((p) => p.disponible) ?? [];
 ---
+
 <Base>
-  <main id="contenido" class="contenedor py-16">
-    <h1 class="text-hero font-bold">{t('sitio.nombre')}</h1>
-    <p class="mt-4 text-tinta-suave">{t('aviso.concepto')}</p>
+  <Cabecera />
+  <main id="contenido">
+    {
+      catalogo ? (
+        <>
+          <Hero categorias={catalogo.categorias} tasa={catalogo.ajustes.tasaBcv} />
+          <Ofertas productos={disponibles.filter((p) => p.ofertaPct).slice(0, 4)} tasa={catalogo.ajustes.tasaBcv} />
+          <Categorias categorias={catalogo.categorias} productos={disponibles} />
+          <Recomendados productos={disponibles.filter((p) => p.destacado).slice(0, 8)} total={disponibles.length} tasa={catalogo.ajustes.tasaBcv} />
+          <AlMayor productos={disponibles.filter(tieneMayor).slice(0, 6)} />
+          <ComoPedir />
+          <Pregunta />
+          <Visitanos ajustes={catalogo.ajustes} />
+        </>
+      ) : (
+        <p class="contenedor py-24 text-lg">{t('catalogo.error')}</p>
+      )
+    }
   </main>
+  <Pie ajustes={catalogo?.ajustes} />
 </Base>

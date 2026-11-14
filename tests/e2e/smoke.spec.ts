@@ -10,6 +10,9 @@ test('el inicio carga en español con el aviso de concepto', async ({ page }) =>
   await expect(page.locator('html')).toHaveAttribute('lang', 'es');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(page.getByText(/Tienda ficticia/)).toBeVisible();
+  // Los precios se ven en dólares y en bolívares
+  await expect(page.getByText(/^\$ \d+,\d{2}$/).first()).toBeVisible();
+  await expect(page.getByText(/^Bs [\d.]+,\d{2}$/).first()).toBeVisible();
   expect(errores).toEqual([]);
 });
 

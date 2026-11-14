@@ -171,7 +171,8 @@ La tasa BCV es un valor de ejemplo guardado en `ajustes`, rotulado como tal. Lee
 
 ## 9. Imágenes
 
-- **Productos:** fotos libres (Wikimedia Commons, Unsplash u otras con licencia libre), de productos genéricos sin marcas visibles, recortadas y optimizadas con `astro:assets`. Los créditos van en `src/data/creditos.ts` y en el pie.
+- **Productos:** generadas por el usuario con Nano Banana (2026-11-14) en 4 cuadrículas de 3×3, sin marcas, y recortadas en `src/assets/productos/<slug>.jpg` con la procedencia incrustada. El pie las acredita como generadas con IA. Las cuadrículas originales quedan fuera de git (`.impeccable/mocks/productos/`).
+- **Servir:** las páginas se generan en el Worker y el adaptador no transforma imágenes ahí (serviría los originales; el hero pesa 2 MB). `scripts/imagenes.sh` (ImageMagick) prepara las WebP en `public/img/` a varios anchos y la lista `src/data/fotos-disponibles.ts`; `src/lib/fotos.ts` arma los `srcset`. Se vuelve a ejecutar si cambia una imagen.
 - **Don Pascal:** lo generó el usuario con Nano Banana (2026-11-14). Hay dos PNG con fondo transparente de 1340×2400:
   - `images/don_Pascal1.png`: cuerpo entero con los brazos cruzados, para el hero;
   - `images/don_Pascal.png`: de medio cuerpo, para el avatar del chat, recortado a la cara.

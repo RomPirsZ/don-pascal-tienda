@@ -1,0 +1,52 @@
+---
+import Icono from './Icono.astro';
+import { t } from '../i18n';
+import type { Producto } from '../lib/catalogo';
+import { formatoUsd, precioUnitario } from '../lib/precios';
+
+interface Props {
+  productos: Producto[];
+}
+
+const { productos } = Astro.props;
+---
+
+<section id="al-mayor" class="sobre-monte bg-monte py-16 text-papel lg:py-20" aria-labelledby="mayor-titulo">
+  <div class="contenedor grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center">
+    <div>
+      <h2 id="mayor-titulo" class="text-titulo font-bold">{t('mayor.titulo')}</h2>
+      <p class="mt-4 max-w-[36rem] text-lg text-sobre-monte-suave">{t('mayor.texto')}</p>
+      <a href="/productos/?mayor=1" class="mt-8 inline-flex items-center gap-2 rounded-full bg-maiz px-6 py-3 font-semibold text-tinta no-underline transition-transform duration-150 active:scale-95">
+        {t('mayor.ver')}
+        <Icono nombre="flecha" class="size-5" />
+      </a>
+    </div>
+    <div class="overflow-hidden rounded-tarjeta bg-papel text-tinta shadow-flotante">
+      <table class="precio w-full text-left text-sm sm:text-base">
+        <thead class="bg-superficie text-tinta-suave">
+          <tr>
+            <th scope="col" class="px-4 py-3 font-semibold">{t('mayor.producto')}</th>
+            <th scope="col" class="px-3 py-3 text-right font-semibold">{t('mayor.desde')}</th>
+            <th scope="col" class="hidden px-3 py-3 text-right font-semibold sm:table-cell">{t('mayor.detal')}</th>
+            <th scope="col" class="px-4 py-3 text-right font-semibold">{t('mayor.precio')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            productos.map((p) => (
+              <tr class="border-t border-linea">
+                <th scope="row" class="px-4 py-3 font-semibold">
+                  {p.nombre}
+                  <span class="block font-normal text-tinta-suave">{p.presentacion}</span>
+                </th>
+                <td class="px-3 py-3 text-right whitespace-nowrap">{t('mayor.unidades', { n: String(p.minimoMayor) })}</td>
+                <td class="hidden px-3 py-3 text-right whitespace-nowrap text-tinta-suave sm:table-cell">{formatoUsd(precioUnitario(p))}</td>
+                <td class="px-4 py-3 text-right font-bold whitespace-nowrap text-hoja-texto">{formatoUsd(precioUnitario(p, p.minimoMayor ?? 1))}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

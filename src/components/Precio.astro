@@ -1,0 +1,26 @@
+---
+// Precio en $ y Bs (plan §5): siempre de precios.ts, nunca calculado aquí.
+import { t } from '../i18n';
+import type { Producto } from '../lib/catalogo';
+import { aCentavos, bolivares, formatoBs, formatoUsd, precioUnitario } from '../lib/precios';
+
+interface Props {
+  producto: Producto;
+  tasa: number;
+  /** Tamaño del precio principal */
+  grande?: boolean;
+  /** Sobre fondos de color o el monte */
+  claseUsd?: string;
+  claseBs?: string;
+}
+
+const { producto, tasa, grande = false, claseUsd = 'text-tinta', claseBs = 'text-tinta-suave' } = Astro.props;
+const precio = precioUnitario(producto);
+const lista = aCentavos(producto.precioUsd);
+---
+
+<p class="precio flex flex-wrap items-baseline gap-x-2 leading-tight">
+  <span class:list={['font-bold', grande ? 'text-precio' : 'text-lg', claseUsd]}>{formatoUsd(precio)}</span>
+  {precio < lista && <s class:list={['text-sm', claseBs]}>{t('ofertas.antes', { precio: formatoUsd(lista) })}</s>}
+  <span class:list={['basis-full text-sm', claseBs]}>{t('precio.bs', { bs: formatoBs(bolivares(precio, tasa)) })}</span>
+</p>

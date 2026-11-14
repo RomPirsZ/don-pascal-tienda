@@ -1,0 +1,71 @@
+---
+import Foto from './Foto.astro';
+import Icono from './Icono.astro';
+import Precio from './Precio.astro';
+import { t } from '../i18n';
+import type { Producto } from '../lib/catalogo';
+import { fotoProducto } from '../lib/fotos';
+import { enlaceWhatsApp, mensajeProducto, NUMERO_TIENDA } from '../lib/whatsapp';
+
+interface Props {
+  producto: Producto;
+  tasa: number;
+}
+
+const { producto, tasa } = Astro.props;
+const foto = fotoProducto(producto.slug);
+const pedir = enlaceWhatsApp(mensajeProducto(producto, tasa), NUMERO_TIENDA);
+const ficha = `/productos/${producto.slug}/`;
+---
+
+<article class="group relative flex flex-col rounded-tarjeta bg-papel p-3 shadow-tarjeta transition-shadow duration-200 hover:shadow-flotante">
+  <div class="relative overflow-hidden rounded-control bg-superficie">
+    {
+      foto && (
+        <Foto
+          imagen={foto}
+          alt=""
+          sizes="(min-width: 64rem) 16rem, (min-width: 40rem) 30vw, 45vw"
+          class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        />
+      )
+    }
+    {
+      producto.ofertaPct && (
+        <span class="absolute top-2 left-2 rounded-full bg-aji px-2.5 py-0.5 text-sm font-bold text-tinta">
+          {t('ofertas.descuento', { pct: String(producto.ofertaPct) })}
+        </span>
+      )
+    }
+  </div>
+  <div class="flex flex-1 flex-col gap-1 px-1 pt-3">
+    <h3 class="text-base font-semibold">
+      <a href={ficha} class="no-underline after:absolute after:inset-0 after:rounded-tarjeta">{producto.nombre}</a>
+    </h3>
+    <p class="text-sm text-tinta-suave">{producto.presentacion}</p>
+    <div class="mt-auto flex items-end justify-between gap-2 pt-2">
+      <Precio producto={producto} tasa={tasa} />
+      <button
+        type="button"
+        data-anadir={producto.slug}
+        hidden
+        class="relative z-10 grid size-11 shrink-0 place-items-center rounded-full bg-maiz text-tinta transition-transform duration-150 active:scale-95"
+        aria-label={t('producto.anadir', { nombre: producto.nombre })}
+      >
+        <Icono nombre="mas" class="size-5" />
+      </button>
+      {
+        pedir && (
+          <a
+            href={pedir}
+            data-sin-js
+            class="relative z-10 shrink-0 rounded-full bg-maiz px-4 py-2 text-sm font-semibold text-tinta no-underline"
+            aria-label={t('producto.pedir-largo', { nombre: producto.nombre })}
+          >
+            {t('producto.pedir')}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
