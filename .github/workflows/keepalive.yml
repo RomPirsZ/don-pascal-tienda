@@ -20,7 +20,7 @@ jobs:
       - name: Llamar a ping() en Supabase
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
         run: |
           curl --fail-with-body -sS --max-time 20 -X POST "$SUPABASE_URL/rest/v1/rpc/ping" \
-            -H "apikey: $SUPABASE_ANON_KEY" -H 'Content-Type: application/json' --data '{}'
+            -H "apikey: $SUPABASE_PUBLISHABLE_KEY" -H 'Content-Type: application/json' --data '{}'
