@@ -34,3 +34,9 @@ export const FOTOS_DISPONIBLES: ReadonlySet<string> = new Set([
   'refresco-cola-2l',
   'sal-1kg',
 ]);
+export const RECORTES_DISPONIBLES: ReadonlySet<string> = new Set([
+  'fondant-blanco-1kg',
+  'papel-higienico-4',
+  'pasta-corta-1kg',
+  'refresco-cola-2l',
+]);

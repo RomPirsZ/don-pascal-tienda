@@ -1,7 +1,7 @@
 // Imágenes de la tienda (plan §9). Se sirven estáticas desde public/img/, preparadas por
 // scripts/imagenes.sh: el adaptador no transforma imágenes en páginas generadas en cada
 // petición. Las fuentes viven en src/assets/ con su procedencia incrustada.
-import { FOTOS_DISPONIBLES } from '../data/fotos-disponibles';
+import { FOTOS_DISPONIBLES, RECORTES_DISPONIBLES } from '../data/fotos-disponibles';
 
 export interface Imagen {
   src: string;
@@ -17,6 +17,13 @@ export function fotoProducto(slug: string): Imagen | undefined {
   if (!FOTOS_DISPONIBLES.has(slug)) return undefined;
   const ruta = (ancho: number) => `/img/productos/${slug}-${ancho}.webp`;
   return { src: ruta(360), srcset: srcset(ruta, [240, 360, 480, 640]), width: 640, height: 640 };
+}
+
+/** El producto recortado, con transparencia, para flotar sobre un color (banners de oferta), o undefined. */
+export function recorteProducto(slug: string): Imagen | undefined {
+  if (!RECORTES_DISPONIBLES.has(slug)) return undefined;
+  const ruta = (ancho: number) => `/img/productos/recortes/${slug}-${ancho}.webp`;
+  return { src: ruta(360), srcset: srcset(ruta, [240, 360, 480]), width: 480, height: 480 };
 }
 
 /** Don Pascal de cuerpo entero, con transparencia (proporción del original, 1340 × 2400). */

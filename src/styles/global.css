@@ -116,6 +116,11 @@
 }
 
 @layer components {
+  /* Sombra de un producto recortado sobre un color: sigue su silueta y se tiñe de la tinta */
+  .sombra-recorte {
+    filter: drop-shadow(0 14px 14px color-mix(in srgb, var(--tinta) 28%, transparent));
+  }
+
   .contenedor {
     width: 100%;
     max-width: 80rem;

@@ -7,13 +7,25 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 salida=public/img
-rm -rf "$salida" && mkdir -p "$salida/productos"
+rm -rf "$salida" && mkdir -p "$salida/productos/recortes"
 
 # Productos: cuadrados, cuatro anchos (el de 640 es el de la ficha)
 for foto in src/assets/productos/*.jpg; do
   slug=$(basename "$foto" .jpg)
   for ancho in 240 360 480 640; do
     magick "$foto" -resize "${ancho}x${ancho}" -strip -quality 78 "$salida/productos/$slug-$ancho.webp"
+  done
+done
+
+# Recortes con transparencia (los productos de los banners de oferta, E15): flotan sobre el color
+# Se quita el margen transparente y se vuelve a cuadrar con un 6 % de aire: así cada producto
+# llena su hueco (la spec pide fotos «recortadas y grandes») y todos comparten proporción.
+for foto in src/assets/productos/recortes/*.png; do
+  slug=$(basename "$foto" .png)
+  lado=$(magick "$foto" -trim -format '%[fx:ceil(max(w,h)*1.06)]' info:)
+  for ancho in 240 360 480; do
+    magick "$foto" -trim +repage -background none -gravity center -extent "${lado}x${lado}" \
+      -resize "${ancho}x${ancho}" -strip -quality 80 -define webp:alpha-quality=90 "$salida/productos/recortes/$slug-$ancho.webp"
   done
 done
 
@@ -32,6 +44,9 @@ done
   echo "// Generado por scripts/imagenes.sh: no editar a mano."
   echo "export const FOTOS_DISPONIBLES: ReadonlySet<string> = new Set(["
   for foto in src/assets/productos/*.jpg; do echo "  '$(basename "$foto" .jpg)',"; done
+  echo "]);"
+  echo "export const RECORTES_DISPONIBLES: ReadonlySet<string> = new Set(["
+  for foto in src/assets/productos/recortes/*.png; do echo "  '$(basename "$foto" .png)',"; done
   echo "]);"
 } > src/data/fotos-disponibles.ts
 

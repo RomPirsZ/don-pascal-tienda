@@ -271,7 +271,7 @@ Formas blandas y amables. Tres radios: tarjeta (20 px) para tarjetas, banners, l
 - **Internal Padding:** 12 px, con el texto a 4 px más hacia dentro. El enlace del nombre cubre toda la tarjeta; Añadir queda por encima.
 
 ### Banners de oferta
-Bloque de color a sangre de tarjeta (20 px de radio, 20 px de padding, 24 px desde sm) con la rotación maíz, ají, hoja, pradera. A la izquierda el descuento enorme (36 px, 48 px desde sm, 700), el nombre, la presentación y el precio, todo en tinta. A la derecha, la foto cuadrada al 38 % del ancho (máximo 12rem) con radio de control y sombra de tarjeta, que al hover gira -2° y crece un 3 %. Sin cuentas atrás ni existencias.
+Bloque de color a sangre de tarjeta (20 px de radio, 20 px de padding, 24 px desde sm) con la rotación maíz, ají, hoja, pradera. A la izquierda el descuento enorme (36 px, 48 px desde sm, 700), el nombre, la presentación y el precio, todo en tinta. A la derecha, el producto recortado, sin fondo, al 38 % del ancho (máximo 12rem): flota sobre el color con una sombra que sigue su silueta, teñida de tinta (`.sombra-recorte`), y al hover gira -2° y crece un 3 %. Si un producto aún no tiene recorte, se usa su foto de estudio con radio de control y sombra de tarjeta. Sin cuentas atrás ni existencias.
 
 ### Inputs / Fields
 - **Style:** píldora papel con borde de 1 px en tinta suave, 10 px × 16 px, placeholder en tinta suave.
@@ -301,10 +301,15 @@ Curvas, duraciones y distancias son tokens del bloque final de `src/styles/globa
 **La Regla del Quieto.** Con `prefers-reduced-motion: reduce` no hay ninguna animación ni transición, tampoco las de hover ni las del fondo de los diálogos (constitución II).
 
 ### Fotos de producto
-Packshots generados con IA sobre un fondo de estudio gris, cuadrados, recortados por el radio de su contenedor y acreditados en el pie («fotos de producto generadas con IA»). Es el estado actual: los banners de oferta pasarán a packshots recortados, y este apartado se actualizará entonces.
+Dos formas, las dos generadas con IA y acreditadas en el pie («fotos de producto generadas con IA»):
+
+- **De estudio** (tarjetas, catálogo y ficha): packshots cuadrados sobre un fondo de estudio gris, recortados por el radio de su contenedor.
+- **Recortadas** (banners de oferta): el mismo producto sin fondo, en `src/assets/productos/recortes/` con su procedencia incrustada (generado con Nano Banana y fondo quitado por el usuario). `scripts/imagenes.sh` quita el margen transparente y vuelve a cuadrar con un 6 % de aire, así cada producto llena su hueco, y las sirve en WebP con transparencia.
+
+**La Regla del Producto que Flota.** Sobre un color de marca, el producto va recortado y flota; la baldosa gris de estudio solo va sobre papel o superficie.
 
 ### Página 404
-Se genera en el Worker con la tienda completa: cabecera con el carrito, chat y pie. Titular de sección, texto, el buscador y «Volver a la tienda» en maíz; desde lg, a la derecha, Don Pascal sin insignias sobre un arco pradera que se apoya en el pie.
+Se genera en el Worker con la tienda completa: cabecera con el carrito, chat y pie. Titular de sección, texto, el buscador y «Volver al inicio» en maíz; desde lg, a la derecha, Don Pascal sin insignias sobre un arco pradera que se apoya en el pie.
 
 ## Do's and Don'ts
 

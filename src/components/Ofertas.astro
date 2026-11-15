@@ -4,7 +4,7 @@ import Foto from './Foto.astro';
 import Precio from './Precio.astro';
 import { t } from '../i18n';
 import type { Producto } from '../lib/catalogo';
-import { fotoProducto } from '../lib/fotos';
+import { fotoProducto, recorteProducto } from '../lib/fotos';
 
 interface Props {
   productos: Producto[];
@@ -20,7 +20,9 @@ const fondos = ['bg-maiz', 'bg-aji', 'bg-hoja', 'bg-pradera'];
   <ul data-revelar-lista class="mt-8 grid gap-4 sm:grid-cols-2">
     {
       productos.map((p, i) => {
-        const foto = fotoProducto(p.slug);
+        // El producto recortado flota sobre el color del banner (E15); sin recorte, la foto de estudio
+        const recorte = recorteProducto(p.slug);
+        const foto = recorte ?? fotoProducto(p.slug);
         return (
           <li class:list={['group relative flex items-center gap-4 overflow-hidden rounded-tarjeta p-5 text-tinta sm:p-6', fondos[i % fondos.length]]}>
             <div class="flex min-w-0 flex-1 flex-col gap-2">
@@ -36,7 +38,10 @@ const fondos = ['bg-maiz', 'bg-aji', 'bg-hoja', 'bg-pradera'];
                 imagen={foto}
                 alt=""
                 sizes="(min-width: 40rem) 12rem, 38vw"
-                class="aspect-square w-[38%] max-w-48 shrink-0 rounded-control object-cover shadow-tarjeta transition-transform duration-250 ease-suave group-hover:-rotate-2 group-hover:scale-[1.03]"
+                class={[
+                  'aspect-square w-[38%] max-w-48 shrink-0 transition-transform duration-250 ease-suave group-hover:-rotate-2 group-hover:scale-[1.03]',
+                  recorte ? 'sombra-recorte object-contain' : 'rounded-control object-cover shadow-tarjeta',
+                ].join(' ')}
               />
             )}
           </li>
