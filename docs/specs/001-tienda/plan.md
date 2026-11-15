@@ -130,16 +130,13 @@ La tasa BCV es un valor de ejemplo guardado en `ajustes`, rotulado como tal. Lee
 
 **`/api/chat`** (POST JSON):
 - **Entrada:** `{ mensajes: [{rol: "cliente"|"asistente", texto}], turnstile }`. Como mucho 12 mensajes y 600 caracteres por mensaje. El servidor reconstruye los roles: no acepta bloques de herramientas ni roles de sistema desde el navegador.
-- **Orden de las comprobaciones:** método → tamaño → JSON → Turnstile (el token se pide al abrir el chat y se renueva al caducar) → límite por IP (`rate-limit.ts`, 5 por minuto) → tope diario (`chat_count_24h() < TOPE_DIARIO`, por defecto **30**) → Claude → `price-guard` → insertar en `chat_uso`.
+- **Orden de las comprobaciones:** método → tamaño → JSON y validación del historial (antes de gastar una verificación de Turnstile) → Turnstile → límite por IP (`rate-limit.ts`, 5 por minuto) → configuración → tope diario (`chat_count_24h() < TOPE_DIARIO`, por defecto **30**; si no se puede contar, no se llama a Claude) → Claude con `price-guard` → insertar en `chat_uso`, también si Claude falló o la respuesta no se envía, porque pudo costar igual.
+- **Turnstile:** cada token sirve para una sola verificación, así que el widget (E11) pide uno nuevo para cada pregunta.
 - **Respuestas:**
-  - 200 `{ texto }`;
-  - 400 entrada inválida;
-  - 403 Turnstile;
-  - 405 método;
-  - 413 tamaño;
-  - 429 límite por IP;
-  - 503 `{ motivo: "tope" }`, cuando se llega al tope diario y el chat remite a WhatsApp;
-  - 500 genérico.
+  - 200 `{ texto }`, o `{ texto, remitir: true }` con la respuesta segura cuando la de Claude no se puede enviar (el widget ofrece WhatsApp);
+  - los errores, `{ error }` con un código estable que traduce el widget: 400 `entrada`, 403 `verificacion`, 405 `metodo`, 413 `tamano`, 429 `limite` (con `Retry-After`);
+  - 503 `tope`, cuando se llega al tope diario, y 503 `no-disponible`, cuando falla la API de Claude (también si se alcanza el tope mensual de la consola): en los dos el chat remite a WhatsApp;
+  - 500 `servidor`, genérico (configuración, Supabase o catálogo; el detalle va a los logs, sin el texto del visitante).
   
   Todas con `no-store` y las cabeceras del servidor.
 - **Coste (es una demo, cambio 2026-11-14):** con Opus 5.5 ($4 / $20 por millón de tokens de entrada y salida), una respuesta con 1 o 2 vueltas de herramientas cuesta unos $0,02–0,03 con la caché. El tope de 30 al día, compartido entre la web y WhatsApp, deja como mucho alrededor de $0,90 al día.

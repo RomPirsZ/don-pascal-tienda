@@ -33,8 +33,8 @@ test('el servidor envía las cabeceras en páginas y en el 404', async ({ reques
   expectSecurityHeaders(noExiste, '/no-existe');
 });
 
-// Las cabeceras de lo que genera el Worker (src/middleware.ts) se prueban con la primera ruta de
-// servidor, /api/chat (E10): hasta entonces todo el sitio es estático y el Worker no responde nada.
+// Las cabeceras de las rutas de /api (src/lib/chat-handler.ts y src/middleware.ts) se prueban en
+// tests/e2e/chat-api.spec.ts.
 
 test('la CSP no abre puertas: sin unsafe-*, sin comodines, sin plugins ni <base>', () => {
   expect(csp).not.toMatch(/'unsafe-(inline|eval|hashes)'|'strict-dynamic'|\*/);
