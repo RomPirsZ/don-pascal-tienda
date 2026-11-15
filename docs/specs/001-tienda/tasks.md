@@ -39,6 +39,8 @@
 
 ## Fase 4 — WhatsApp (recortable)
 
+> **Aplazada 2026-11-15** por decisión del usuario: sin crédito en la API de Claude no se puede probar de punta a punta. Queda para una implementación futura; la spec ya la prevé recortable (§10). El sitio sigue remitiendo a WhatsApp con el enlace de la tienda.
+
 - [ ] E13 `/api/whatsapp`: reto, firma, historial en KV y respuesta por la Graph API + tests; despliegue en Workers; configuración guiada en Meta con el número de prueba
 
 **Hecho cuando:** un mensaje real desde un teléfono verificado recibe una respuesta con datos del catálogo.
