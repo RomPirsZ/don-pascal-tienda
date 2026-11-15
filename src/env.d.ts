@@ -4,6 +4,8 @@
 interface ImportMetaEnv {
   /** Número de WhatsApp de la tienda, solo dígitos con código de país (plan §5). Vacío: modo «Copiar». */
   readonly PUBLIC_STORE_WHATSAPP?: string;
+  /** Clave de sitio de Turnstile (pública). Vacía: la de prueba de Cloudflare, que el servidor rechaza en producción. */
+  readonly PUBLIC_TURNSTILE_SITE_KEY?: string;
 }
 
 declare module 'cloudflare:workers' {

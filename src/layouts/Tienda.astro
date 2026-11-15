@@ -3,6 +3,7 @@
 import Base from './Base.astro';
 import Cabecera from '../components/Cabecera.astro';
 import Carrito from '../components/Carrito.astro';
+import Chat from '../components/Chat.astro';
 import Pie from '../components/Pie.astro';
 import { t } from '../i18n';
 import type { Catalogo } from '../lib/catalogo';
@@ -25,4 +26,5 @@ const { catalogo, ...base } = Astro.props;
   </main>
   <Pie ajustes={catalogo?.ajustes} />
   {catalogo && <Carrito catalogo={catalogo} />}
+  {catalogo && <Chat />}
 </Base>

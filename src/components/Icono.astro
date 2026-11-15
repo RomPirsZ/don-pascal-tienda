@@ -3,7 +3,7 @@
 // sin dependencia. Todos en la misma rejilla de 24 px y trazo de 2.
 type Nombre =
   | 'buscar' | 'cesta' | 'reloj' | 'ubicacion' | 'camion' | 'mensaje' | 'mas' | 'menos'
-  | 'menu' | 'cerrar' | 'flecha' | 'paquete' | 'etiqueta' | 'abajo';
+  | 'menu' | 'cerrar' | 'flecha' | 'paquete' | 'etiqueta' | 'abajo' | 'enviar';
 
 interface Props {
   nombre: Nombre;
@@ -32,6 +32,8 @@ const trazos: Record<Nombre, string> = {
   etiqueta:
     '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>',
   abajo: '<path d="m6 9 6 6 6-6"/>',
+  enviar:
+    '<path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/>',
 };
 ---
 

@@ -26,7 +26,7 @@ const { categorias, tasa } = Astro.props;
       <div class="mt-8">
         <Buscador categorias={categorias} sobreMonte />
       </div>
-      <a href="#pregunta" class="mt-4 inline-flex items-center gap-2 font-semibold text-maiz no-underline hover:underline">
+      <a href="#pregunta" data-chat-abrir class="mt-4 inline-flex items-center gap-2 font-semibold text-maiz no-underline hover:underline">
         <Icono nombre="mensaje" class="size-5" />
         {t('hero.pregunta')}
       </a>
