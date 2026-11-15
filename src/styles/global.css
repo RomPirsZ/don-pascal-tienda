@@ -136,8 +136,7 @@
    - Con reduced-motion no hay animaciones (constitución II y spec §8): ver el final. */
 :root {
   /* Escala de transitions.dev, por uso (revisión de transitions-polish, 2026-11-15) */
-  --curva-suave: cubic-bezier(0.22, 1, 0.36, 1); /* abrir, cerrar, llegar y hover (--ease-smooth-out) */
-  --curva-rebote: cubic-bezier(0.34, 1.36, 0.64, 1); /* lo que brota: insignias y burbujas (--ease-bounce) */
+  --curva-suave: cubic-bezier(0.22, 1, 0.36, 1); /* abrir, cerrar, llegar, brotar y hover (--ease-smooth-out); sin rebote */
   --curva-llegada: cubic-bezier(0.16, 1, 0.3, 1); /* solo la llegada de Don Pascal, el momento propio */
   --mov-panel: 400ms; /* abrir un panel (--duration-slow) */
   --mov-panel-salida: 350ms; /* cerrarlo, algo más rápido (--duration-medium) */
@@ -187,11 +186,11 @@
      de la boca (su pico, a la derecha) y la insignia del horario, de su icono */
   .hero-bocadillo {
     transform-origin: 100% 50%;
-    animation: brota var(--mov-brota) var(--curva-rebote) 900ms backwards;
+    animation: brota var(--mov-brota) var(--curva-suave) 900ms backwards;
   }
   .hero-insignia {
     transform-origin: 1.5rem 50%;
-    animation: brota var(--mov-brota) var(--curva-rebote) 1150ms backwards;
+    animation: brota var(--mov-brota) var(--curva-suave) 1150ms backwards;
   }
 
   /* El texto del hero llega antes que él, de arriba abajo: las dos líneas del titular, la
@@ -234,12 +233,12 @@
     }
     .hero-bocadillo {
       animation:
-        brota var(--mov-brota) var(--curva-rebote) 900ms backwards,
+        brota var(--mov-brota) var(--curva-suave) 900ms backwards,
         vaiven 5.5s ease-in-out 1.6s infinite;
     }
     .hero-insignia {
       animation:
-        brota var(--mov-brota) var(--curva-rebote) 1150ms backwards,
+        brota var(--mov-brota) var(--curva-suave) 1150ms backwards,
         vaiven 6.5s ease-in-out 2.4s infinite;
     }
     [data-fuera] :is(.hero-bocadillo, .hero-insignia) {
@@ -264,7 +263,6 @@
   /* Las preguntas de ejemplo llegan como mensajes de chat, desde su esquina */
   [data-revelar='burbuja'] {
     transform-origin: 0 100%;
-    transition-timing-function: var(--curva-rebote);
   }
   [data-revelar='burbuja'].revelar-pendiente {
     translate: 0 0.5rem;

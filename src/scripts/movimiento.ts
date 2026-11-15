@@ -52,5 +52,5 @@ export function iniciarMovimiento(): void {
 /** Un pulso breve en el contador del carrito al añadir: confirma la acción aunque el carrito esté lejos. */
 export function pulsoContador(contador: Element): void {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('animate' in contador)) return;
-  contador.animate([{ scale: 1 }, { scale: 1.35 }, { scale: 1 }], { duration: 320, easing: 'cubic-bezier(0.34, 1.36, 0.64, 1)' });
+  contador.animate([{ scale: 1 }, { scale: 1.35 }, { scale: 1 }], { duration: 320, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
 }
