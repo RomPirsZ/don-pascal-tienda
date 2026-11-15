@@ -8,6 +8,8 @@ dist/
 !.env.example
 test-results/
 playwright-report/
+# Informes de la batería del asistente contra la API real (E12)
+.bateria/
 .taste-skill/
 
 # Impeccable: bocetos, imágenes del catálogo y capturas de revisión (no se publican)

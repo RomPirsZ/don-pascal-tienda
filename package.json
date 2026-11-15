@@ -12,6 +12,7 @@
     "astro": "astro",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
+    "test:asistente-real": "vitest run --config vitest.real.config.ts",
     "test": "npm run test:unit && npm run test:e2e"
   },
   "engines": {
