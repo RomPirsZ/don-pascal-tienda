@@ -39,7 +39,7 @@ test('la ficha muestra precio, al mayor y vuelve al catálogo', async ({ page })
   await expect(page).toHaveURL('/productos/harina-maiz-1kg/');
   await expect(page.getByRole('heading', { level: 1, name: 'Harina de maíz precocida' })).toBeVisible();
   await expect(page.getByText('$ 1,15', { exact: true })).toBeVisible();
-  await expect(page.getByText(/Desde 20 unidades pagas \$ 0,98 por unidad/)).toBeVisible();
+  await expect(page.getByText(/Desde 20 unidades pagas \$\s0,98 por unidad/)).toBeVisible();
   await expect(page).toHaveTitle('Harina de maíz precocida 1 kg | Don Pascal');
   await page.getByRole('navigation', { name: 'Ruta de navegación' }).getByRole('link', { name: 'Víveres' }).click();
   await expect(page.getByRole('heading', { level: 1, name: 'Víveres' })).toBeVisible();

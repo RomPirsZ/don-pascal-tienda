@@ -21,7 +21,7 @@ const { catalogo, ...base } = Astro.props;
 
 <Base {...base}>
   <Cabecera />
-  <main id="contenido">
+  <main id="contenido" class="flex flex-1 flex-col">
     {catalogo ? <slot /> : <p class="contenedor py-24 text-lg">{t('catalogo.error')}</p>}
   </main>
   <Pie ajustes={catalogo?.ajustes} />

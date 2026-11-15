@@ -22,7 +22,7 @@ const [anio, mes, dia] = (ajustes?.tasaFecha ?? '').split('-');
       <p>{t('pie.creditos')}</p>
       {ajustes && <p class="precio">{t('pie.tasa', { tasa: formatoBs(Math.round(ajustes.tasaBcv * 100)), fecha: `${dia}/${mes}/${anio}` })}</p>}
       <p>
-        © {new Date().getFullYear()} ·
+        © {new Date().getFullYear()} ·{' '}
         <a href="https://ankordev-portafolio.ankordev.workers.dev/" class="font-semibold text-papel">{t('pie.ankordev')}</a>
       </p>
     </div>

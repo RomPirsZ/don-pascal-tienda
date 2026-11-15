@@ -60,23 +60,23 @@ describe('buscar_productos', () => {
       nombre: 'Harina de trigo leudante',
       presentacion: '1 kg',
       categoria: 'Repostería',
-      precio: '$ 1,30',
-      precio_bs: 'Bs 1.185,11',
+      precio: '$\u00a01,30',
+      precio_bs: 'Bs\u00a01.185,11',
       precio_antes: null,
       oferta: null,
-      al_mayor: { minimo: 10, precio: '$ 1,10 c/u', precio_bs: 'Bs 1.002,78 c/u' },
+      al_mayor: { minimo: 10, precio: '$\u00a01,10 c/u', precio_bs: 'Bs\u00a01.002,78 c/u' },
       disponible: true,
     });
   });
 
   it('con oferta: precio rebajado, precio de antes y porcentaje', () => {
     const [pasta] = resultado('buscar_productos', { texto: 'pasta' }).productos;
-    expect(pasta).toMatchObject({ precio: '$ 1,44', precio_bs: 'Bs 1.312,73', precio_antes: '$ 1,60', oferta: '10 %', al_mayor: null });
+    expect(pasta).toMatchObject({ precio: '$\u00a01,44', precio_bs: 'Bs\u00a01.312,73', precio_antes: '$\u00a01,60', oferta: '10 %', al_mayor: null });
   });
 
   it('solo ofrece al mayor si ahorra frente al precio de oferta', () => {
     const [fondant] = resultado('buscar_productos', { texto: 'fondant' }).productos;
-    expect(fondant).toMatchObject({ precio: '$ 5,78', oferta: '15 %', al_mayor: { minimo: 5, precio: '$ 5,50 c/u' } });
+    expect(fondant).toMatchObject({ precio: '$\u00a05,78', oferta: '15 %', al_mayor: { minimo: 5, precio: '$\u00a05,50 c/u' } });
   });
 
   it('filtra por categoría', () => {
@@ -118,8 +118,8 @@ describe('ver_producto', () => {
     expect(r.producto).toMatchObject({
       nombre: 'Agua mineral',
       presentacion: '1,5 L',
-      precio: '$ 0,90',
-      al_mayor: { minimo: 12, precio: '$ 0,75 c/u' },
+      precio: '$\u00a00,90',
+      al_mayor: { minimo: 12, precio: '$\u00a00,75 c/u' },
     });
     expect(r.producto.descripcion.length).toBeGreaterThan(0);
   });
@@ -142,13 +142,13 @@ describe('calcular_total', () => {
           nombre: 'Harina de trigo leudante',
           presentacion: '1 kg',
           cantidad: 3,
-          precio_unitario: '$ 1,30',
+          precio_unitario: '$\u00a01,30',
           al_mayor: false,
-          subtotal: '$ 3,90',
+          subtotal: '$\u00a03,90',
         },
       ],
-      total: '$ 3,90',
-      total_bs: 'Bs 3.555,32',
+      total: '$\u00a03,90',
+      total_bs: 'Bs\u00a03.555,32',
       no_encontrados: [],
       agotados: [],
     });
@@ -163,10 +163,10 @@ describe('calcular_total', () => {
       ],
     });
     expect(r.lineas).toHaveLength(2);
-    expect(r.lineas[0]).toMatchObject({ cantidad: 10, precio_unitario: '$ 1,10', al_mayor: true, subtotal: '$ 11,00' });
-    expect(r.lineas[1]).toMatchObject({ cantidad: 2, precio_unitario: '$ 1,44', subtotal: '$ 2,88' });
-    expect(r.total).toBe('$ 13,88');
-    expect(r.total_bs).toBe('Bs 12.653,29');
+    expect(r.lineas[0]).toMatchObject({ cantidad: 10, precio_unitario: '$\u00a01,10', al_mayor: true, subtotal: '$\u00a011,00' });
+    expect(r.lineas[1]).toMatchObject({ cantidad: 2, precio_unitario: '$\u00a01,44', subtotal: '$\u00a02,88' });
+    expect(r.total).toBe('$\u00a013,88');
+    expect(r.total_bs).toBe('Bs\u00a012.653,29');
   });
 
   it('separa los productos que no existen y los agotados, y no los suma', () => {
@@ -184,7 +184,7 @@ describe('calcular_total', () => {
     expect(r.no_encontrados).toEqual(['caviar-beluga']);
     expect(r.agotados).toEqual(['malta-355ml']);
     expect(r.lineas.map((l: { slug: string }) => l.slug)).toEqual(['arroz-blanco-1kg']);
-    expect(r.total).toBe('$ 1,25');
+    expect(r.total).toBe('$\u00a01,25');
   });
 
   it('una suma que pasaría de 99 unidades por producto es un error', () => {
@@ -210,7 +210,7 @@ describe('info_tienda', () => {
     expect(r).toMatchObject({
       horario: catalogo.ajustes.horario,
       direccion: catalogo.ajustes.direccion,
-      tasa: '$ 1 = Bs 911,62',
+      tasa: '$\u00a01 = Bs\u00a0911,62',
       tasa_fecha: '2026-11-14',
     });
     expect(r.categorias).toEqual(catalogo.categorias.map((c) => ({ slug: c.slug, nombre: c.nombre })));

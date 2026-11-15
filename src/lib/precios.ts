@@ -57,5 +57,7 @@ export function bolivares(centavosUsd: number, tasa: number): number {
 
 const numero = new Intl.NumberFormat('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-export const formatoUsd = (centavos: number): string => `$ ${numero.format(centavos / 100)}`;
-export const formatoBs = (centimos: number): string => `Bs ${numero.format(centimos / 100)}`;
+// Espacio duro entre la moneda y la cifra: un importe nunca se parte entre dos líneas, en la
+// web ni en cualquier frase que lo interpole (E15). price-guard lee igual el espacio duro.
+export const formatoUsd = (centavos: number): string => `$\u00a0${numero.format(centavos / 100)}`;
+export const formatoBs = (centimos: number): string => `Bs\u00a0${numero.format(centimos / 100)}`;

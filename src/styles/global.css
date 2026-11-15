@@ -51,6 +51,8 @@
   --text-subtitulo: clamp(1.25rem, 1.11rem + 0.57vw, 1.625rem);
   --text-cuerpo: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);
   --text-pequeno: 0.875rem;
+  /* Lo más pequeño que se lee: contadores, números de los pasos y chips (E15: nada bajo 13 px) */
+  --text-mini: 0.8125rem;
   --text-precio: clamp(1.125rem, 1.03rem + 0.38vw, 1.375rem);
 
   --radius-tarjeta: 1.25rem;

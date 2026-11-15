@@ -122,7 +122,7 @@ describe('las vueltas de herramientas', () => {
     expect(segunda[1]).toEqual({ role: 'assistant', content: primera.content });
     const [resultado] = bloques(peticiones[1], 2);
     expect(resultado).toMatchObject({ type: 'tool_result', tool_use_id: 'tu_1', is_error: false });
-    expect(JSON.parse(resultado?.['content'] as string).productos[0].precio).toBe('$ 1,30');
+    expect(JSON.parse(resultado?.['content'] as string).productos[0].precio).toBe('$\u00a01,30');
   });
 
   it('varias herramientas a la vez: todos los resultados en un mismo mensaje', async () => {

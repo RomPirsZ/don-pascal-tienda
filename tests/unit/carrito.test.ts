@@ -72,10 +72,10 @@ describe('mensajePedido', () => {
     expect(mensajePedido(r, { tasa, tasaFecha: '2026-11-14' })).toBe(
       [
         'Hola, Don Pascal. Quiero hacer este pedido:',
-        '• 20 × Harina de maíz precocida (1 kg), al mayor: $ 19,60',
-        '• 1 × Café molido (500 g): $ 4,90',
-        'Total: $ 24,50 (Bs 22.334,69)',
-        'Tasa de ejemplo: Bs 911,62 por dólar (14/11/2026). Precios de ejemplo.',
+        '• 20 × Harina de maíz precocida (1 kg), al mayor: $\u00a019,60',
+        '• 1 × Café molido (500 g): $\u00a04,90',
+        'Total: $\u00a024,50 (Bs\u00a022.334,69)',
+        'Tasa de ejemplo: Bs\u00a0911,62 por dólar (14/11/2026). Precios de ejemplo.',
       ].join('\n'),
     );
   });

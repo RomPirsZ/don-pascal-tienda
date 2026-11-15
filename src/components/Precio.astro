@@ -20,7 +20,7 @@ const lista = aCentavos(producto.precioUsd);
 ---
 
 <p class="precio flex flex-wrap items-baseline gap-x-2 leading-tight">
-  <span class:list={['font-bold', grande ? 'text-precio' : 'text-lg', claseUsd]}>{formatoUsd(precio)}</span>
-  {precio < lista && <s class:list={['text-sm', claseBs]}>{t('ofertas.antes', { precio: formatoUsd(lista) })}</s>}
-  <span class:list={['basis-full text-sm', claseBs]}>{t('precio.bs', { bs: formatoBs(bolivares(precio, tasa)) })}</span>
+  <span class:list={['font-bold whitespace-nowrap', grande ? 'text-precio' : 'text-lg', claseUsd]}>{formatoUsd(precio)}</span>
+  {precio < lista && <s class:list={['text-sm whitespace-nowrap', claseBs]}>{t('ofertas.antes', { precio: formatoUsd(lista) })}</s>}
+  <span class:list={['basis-full text-sm whitespace-nowrap', claseBs]}>{t('precio.bs', { bs: formatoBs(bolivares(precio, tasa)) })}</span>
 </p>

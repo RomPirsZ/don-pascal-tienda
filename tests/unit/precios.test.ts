@@ -82,14 +82,14 @@ describe('bolivares', () => {
 
 describe('formato es-VE', () => {
   it('dólares con coma decimal y punto de miles', () => {
-    expect(formatoUsd(115)).toBe('$ 1,15');
-    expect(formatoUsd(123456)).toBe('$ 1.234,56');
-    expect(formatoUsd(70)).toBe('$ 0,70');
+    expect(formatoUsd(115)).toBe('$\u00a01,15');
+    expect(formatoUsd(123456)).toBe('$\u00a01.234,56');
+    expect(formatoUsd(70)).toBe('$\u00a00,70');
   });
 
   it('bolívares igual, con «Bs»', () => {
-    expect(formatoBs(27186)).toBe('Bs 271,86');
-    expect(formatoBs(1234567)).toBe('Bs 12.345,67');
+    expect(formatoBs(27186)).toBe('Bs\u00a0271,86');
+    expect(formatoBs(1234567)).toBe('Bs\u00a012.345,67');
   });
 });
 

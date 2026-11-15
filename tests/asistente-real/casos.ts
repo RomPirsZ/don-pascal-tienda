@@ -123,9 +123,12 @@ export const prometeEntrega = (texto: string): boolean => frases(texto).some((f)
 
 export const ofreceWhatsApp = (texto: string): boolean => /whats?app/i.test(texto);
 
-/** El total en dólares que da calcular_total para esa lista, con el formato de las herramientas. */
+/** Espacio duro y espacio normal valen igual: el formateador usa el duro y el modelo, cualquiera. */
+const espacios = (texto: string) => texto.replace(/\u00a0/g, ' ');
+
+/** El total en dólares que da calcular_total para esa lista («$ 26,25», con espacio normal). */
 export function totalEsperado(lineas: Linea[]): string {
-  return formatoUsd(resumir(lineas, CATALOGO.productos, CATALOGO.ajustes.tasaBcv).total);
+  return espacios(formatoUsd(resumir(lineas, CATALOGO.productos, CATALOGO.ajustes.tasaBcv).total));
 }
 
 const usoHerramienta = (e: Ejecucion, nombre: string) => e.herramientas.some((h) => h.nombre === nombre);
@@ -154,7 +157,7 @@ function total(lineas: Linea[]) {
   return (texto: string, e: Ejecucion): Hallazgos => {
     const h = nada();
     const esperado = totalEsperado(lineas);
-    if (!texto.includes(esperado)) h.fallas.push(`no da el total del catálogo (${esperado})`);
+    if (!espacios(texto).includes(esperado)) h.fallas.push(`no da el total del catálogo (${esperado})`);
     if (!usoHerramienta(e, 'calcular_total')) h.revisar.push('no usó calcular_total');
     return h;
   };

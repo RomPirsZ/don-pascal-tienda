@@ -73,5 +73,6 @@ test('copiar el pedido cuando no hay número de WhatsApp', async ({ page, contex
   await expect(carrito(page).getByRole('link', { name: 'Enviar pedido por WhatsApp' })).toBeHidden();
   await carrito(page).getByRole('button', { name: 'Copiar pedido' }).click();
   await expect(carrito(page).getByRole('status')).toHaveText('Pedido copiado. Pégalo en el chat de la tienda.');
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toContain('• 1 × Sal refinada (1 kg): $ 0,70');
+  // Los importes llevan espacio duro: se comparan como texto normal
+  expect((await page.evaluate(() => navigator.clipboard.readText())).replace(/\u00a0/g, ' ')).toContain('• 1 × Sal refinada (1 kg): $ 0,70');
 });

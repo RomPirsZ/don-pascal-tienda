@@ -27,6 +27,6 @@ describe('mensajeProducto', () => {
       { nombre: 'Harina de maíz precocida', presentacion: '1 kg', precioUsd: 1.15, precioMayorUsd: 0.98, minimoMayor: 20, ofertaPct: null },
       236.4,
     );
-    expect(texto).toBe('Hola, Don Pascal. Quiero pedir 1 × Harina de maíz precocida (1 kg): $ 1,15 / Bs 271,86. (Precios de ejemplo.)');
+    expect(texto).toBe('Hola, Don Pascal. Quiero pedir 1 × Harina de maíz precocida (1 kg): $\u00a01,15 / Bs\u00a0271,86. (Precios de ejemplo.)');
   });
 });

@@ -11,6 +11,15 @@ interface Props {
 }
 
 const { productos, total, tasa } = Astro.props;
+// «Ver todos» cierra la última fila en las tres rejillas (2, 3 y 4 columnas): ocupa lo que falta
+// para completarla, o la fila entera si ya estaba completa. Clases literales para Tailwind.
+const resto = (columnas: number) => columnas - (productos.length % columnas || columnas) || columnas;
+const ANCHO: Record<string, Record<number, string>> = {
+  base: { 1: 'col-span-1', 2: 'col-span-2' },
+  md: { 1: 'md:col-span-1', 2: 'md:col-span-2', 3: 'md:col-span-3' },
+  lg: { 1: 'lg:col-span-1', 2: 'lg:col-span-2', 3: 'lg:col-span-3', 4: 'lg:col-span-4' },
+};
+const anchoVerTodos = [ANCHO['base']![resto(2)], ANCHO['md']![resto(3)], ANCHO['lg']![resto(4)]];
 ---
 
 <section class="contenedor py-16 lg:py-20" aria-labelledby="recomendados-titulo">
@@ -21,11 +30,11 @@ const { productos, total, tasa } = Astro.props;
       <Icono nombre="flecha" class="size-5" />
     </a>
   </div>
-  <ul data-revelar-lista class="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+  <ul data-revelar-lista class="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
     {productos.map((p) => <li class="flex"><TarjetaProducto producto={p} tasa={tasa} /></li>)}
     {
-      productos.length % 4 !== 0 && (
-        <li class="col-span-2 flex lg:col-span-1">
+      productos.length > 0 && (
+        <li class:list={['flex', anchoVerTodos]}>
           <a
             href="/productos/"
             class="sobre-monte flex w-full flex-col justify-between gap-6 rounded-tarjeta bg-monte p-6 text-papel no-underline shadow-tarjeta transition-shadow duration-200 ease-suave hover:shadow-flotante"

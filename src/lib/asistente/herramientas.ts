@@ -187,7 +187,7 @@ function info(catalogo: Catalogo): Salida {
     horario: ajustes.horario,
     direccion: ajustes.direccion,
     // Igual que en la web: la tasa con dos decimales
-    tasa: `$ 1 = ${formatoBs(Math.round(ajustes.tasaBcv * 100))}`,
+    tasa: `$\u00a01 = ${formatoBs(Math.round(ajustes.tasaBcv * 100))}`,
     tasa_fecha: ajustes.tasaFecha,
     categorias: catalogo.categorias.map(({ slug, nombre }) => ({ slug, nombre })),
     al_mayor: t('mayor.texto'),
