@@ -12,6 +12,7 @@ import poppins400 from '@fontsource/poppins/files/poppins-latin-400-normal.woff2
 import poppins600 from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url';
 import poppins700 from '@fontsource/poppins/files/poppins-latin-700-normal.woff2?url';
 import { t } from '../i18n';
+import { IMAGEN_OG, SITE_URL } from '../lib/sitio';
 
 interface Props {
   title?: string;
@@ -21,6 +22,10 @@ interface Props {
 }
 
 const { title = t('sitio.titulo'), description = t('sitio.descripcion'), noindex = false } = Astro.props;
+// Canonical y vista previa al compartir (E17, spec §9): siempre con la URL pública, sin parámetros
+const sitio = Astro.site ?? new URL(SITE_URL);
+const canonical = new URL(Astro.url.pathname, sitio).href;
+const imagenOg = new URL(IMAGEN_OG.ruta, sitio).href;
 ---
 
 <!doctype html>
@@ -31,7 +36,22 @@ const { title = t('sitio.titulo'), description = t('sitio.descripcion'), noindex
     <title>{title}</title>
     <meta name="description" content={description} />
     {[poppins400, poppins700, poppins300, poppins600].map((url) => <link rel="preload" href={url} as="font" type="font/woff2" crossorigin />)}
-    {noindex && <meta name="robots" content="noindex" />}
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t('sitio.nombre')} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_VE" />
+    <meta property="og:image" content={imagenOg} />
+    <meta property="og:image:type" content={IMAGEN_OG.tipo} />
+    <meta property="og:image:width" content={String(IMAGEN_OG.ancho)} />
+    <meta property="og:image:height" content={String(IMAGEN_OG.alto)} />
+    <meta property="og:image:alt" content={t('sitio.og-alt')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imagenOg} />
     <!-- Recortados de la ilustración de Don Pascal (src/assets/don-pascal/medio-cuerpo.png) -->
     <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

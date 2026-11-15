@@ -9,7 +9,8 @@ import TarjetaProducto from '../../components/TarjetaProducto.astro';
 import { t } from '../../i18n';
 import { catalogoDelServidor } from '../../lib/catalogo-servidor';
 import { fotoProducto } from '../../lib/fotos';
-import { ahorroMayor, bolivares, formatoBs, formatoUsd, precioUnitario } from '../../lib/precios';
+import { descripcionFicha } from '../../lib/meta';
+import { ahorroMayor, formatoBs, formatoUsd, precioUnitario } from '../../lib/precios';
 import { enlaceWhatsApp, mensajeProducto, NUMERO_TIENDA } from '../../lib/whatsapp';
 
 export const prerender = false;
@@ -27,15 +28,7 @@ const pedir = producto?.disponible ? enlaceWhatsApp(mensajeProducto(producto, ta
 const precio = producto ? precioUnitario(producto) : 0;
 
 const title = producto ? t('ficha.titulo-meta', { nombre: producto.nombre, presentacion: producto.presentacion }) : `${t('ficha.no-encontrado')} | ${t('sitio.nombre')}`;
-const description = producto
-  ? t('ficha.descripcion-meta', {
-      nombre: producto.nombre,
-      presentacion: producto.presentacion,
-      precio: formatoUsd(precio),
-      bs: formatoBs(bolivares(precio, tasa)),
-      descripcion: producto.descripcion,
-    })
-  : t('ficha.no-encontrado-texto');
+const description = producto ? descripcionFicha(producto, tasa) : t('ficha.no-encontrado-texto');
 ---
 
 <Tienda title={title} description={description} noindex={!producto} catalogo={catalogo}>

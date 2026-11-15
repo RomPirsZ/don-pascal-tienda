@@ -2,8 +2,11 @@
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 import tailwindcss from '@tailwindcss/vite';
+import { SITE_URL } from './src/lib/sitio.ts';
 
 export default defineConfig({
+  // URL absoluta para canonical y Open Graph (E17)
+  site: SITE_URL,
   // Estático por defecto; las rutas que leen datos en cada petición optan por el servidor
   // con `export const prerender = false` (plan §3)
   output: 'static',
