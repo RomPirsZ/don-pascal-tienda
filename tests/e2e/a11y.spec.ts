@@ -2,6 +2,7 @@
 // carrito y el chat abiertos.
 import AxeBuilder from '@axe-core/playwright';
 import { test, expect, type Page } from '@playwright/test';
+import { recorrerYReposar } from './revelar';
 import { stubTurnstile } from './turnstile-stub';
 
 async function sinViolacionesSerias(page: Page, que: string) {
@@ -13,6 +14,8 @@ async function sinViolacionesSerias(page: Page, que: string) {
 for (const ruta of ['/', '/productos/', '/productos/?q=iphone', '/productos/fondant-blanco-1kg/', '/productos/no-existe/', '/no-existe/']) {
   test(`axe: ${ruta}`, async ({ page }) => {
     await page.goto(ruta);
+    // axe mide la página en reposo: con las secciones ya reveladas y sin transiciones a medias (E14)
+    await recorrerYReposar(page);
     await sinViolacionesSerias(page, ruta);
   });
 }

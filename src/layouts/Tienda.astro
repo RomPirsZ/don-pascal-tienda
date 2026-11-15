@@ -28,3 +28,8 @@ const { catalogo, ...base } = Astro.props;
   {catalogo && <Carrito catalogo={catalogo} />}
   {catalogo && <Chat />}
 </Base>
+
+<script>
+  import { iniciarMovimiento } from '../scripts/movimiento';
+  iniciarMovimiento();
+</script>

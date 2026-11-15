@@ -19,10 +19,11 @@ const ejemplos = [t('pregunta.ejemplo1'), t('pregunta.ejemplo2'), t('pregunta.ej
       sizes="(min-width: 48rem) 14rem, 10rem"
       class="mx-auto size-40 rounded-full bg-hoja object-cover shadow-flotante md:size-56"
     />
-    <div>
+    <!-- El título, el texto, las preguntas y los botones llegan en ese orden (E14) -->
+    <div data-revelar-lista>
       <h2 id="pregunta-titulo" class="text-titulo font-bold">{t('pregunta.titulo')}</h2>
       <p class="mt-4 max-w-[40rem] text-lg">{t('pregunta.texto')}</p>
-      <ul class="mt-6 flex flex-wrap gap-2">
+      <ul data-revelar-lista="burbuja" class="mt-6 flex flex-wrap gap-2">
         {ejemplos.map((e) => <li class="rounded-full rounded-bl-md bg-papel px-4 py-2 text-sm shadow-tarjeta">{e}</li>)}
       </ul>
       <div class="mt-8 flex flex-wrap items-center gap-3">

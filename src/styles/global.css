@@ -39,6 +39,9 @@
 
   --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 
+  /* Curvas de movimiento (E14) como utilidades: ease-suave para los hover */
+  --ease-suave: var(--curva-suave);
+
   /* Escala fluida de 390 px a 1440 px; el titular del hero no pasa de 4.5rem. Por debajo de
      390 px encoge con la pantalla (9.9vw) para que «Repostería y víveres» quepa en una línea */
   --text-hero: clamp(1.75rem, min(1.41rem + 3.43vw, 9.9vw - 0.2rem), 4.5rem);
@@ -121,5 +124,189 @@
     .contenedor {
       padding-inline: 2.5rem;
     }
+  }
+}
+
+/* Movimiento (E14, spec §8). Solo se animan propiedades que no recalculan el diseño
+   (constitución II) y siempre desde un estado ya visible: si el JS no llega, todo se ve.
+   - El momento propio: Don Pascal sube desde detrás del mostrador al cargar, saluda con un
+     leve balanceo, el bocadillo le sale de la boca y después brota la insignia del horario.
+   - Lo demás explica estado: secciones que llegan al hacer scroll (las listas, escalonadas),
+     el carrito y el chat que se deslizan desde donde se abren y el contador que confirma.
+   - Con reduced-motion no hay animaciones (constitución II y spec §8): ver el final. */
+:root {
+  /* Escala de transitions.dev, por uso (revisión de transitions-polish, 2026-11-15) */
+  --curva-suave: cubic-bezier(0.22, 1, 0.36, 1); /* abrir, cerrar, llegar y hover (--ease-smooth-out) */
+  --curva-rebote: cubic-bezier(0.34, 1.36, 0.64, 1); /* lo que brota: insignias y burbujas (--ease-bounce) */
+  --curva-llegada: cubic-bezier(0.16, 1, 0.3, 1); /* solo la llegada de Don Pascal, el momento propio */
+  --mov-panel: 400ms; /* abrir un panel (--duration-slow) */
+  --mov-panel-salida: 350ms; /* cerrarlo, algo más rápido (--duration-medium) */
+  --mov-revelar: 500ms; /* aparición de contenido (--duration-very-slow) */
+  --mov-brota: 500ms; /* aparición de una insignia (--duration-very-slow) */
+  --mov-escalon: 40ms; /* por elemento de una lista (--duration-stagger) */
+  --mov-recorrido: 12px; /* lo que sube un bloque al aparecer (--distance-medium) */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* --- Hero: la llegada de Don Pascal --- */
+  @keyframes arco-crece {
+    from {
+      scale: 0.9 0.82;
+    }
+  }
+  @keyframes don-pascal-sube {
+    from {
+      translate: 0 12%;
+    }
+  }
+  @keyframes don-pascal-saluda {
+    35% {
+      rotate: -2.5deg;
+    }
+    70% {
+      rotate: 1.2deg;
+    }
+  }
+  /* Desde escala 0: mientras esperan su turno no se ven (ni un resto de píldora) */
+  @keyframes brota {
+    from {
+      scale: 0;
+    }
+  }
+  .hero-arco {
+    transform-origin: 50% 100%;
+    animation: arco-crece 700ms var(--curva-llegada) backwards;
+  }
+  .hero-don-pascal {
+    transform-origin: 50% 100%;
+    animation:
+      don-pascal-sube 800ms var(--curva-llegada) 80ms backwards,
+      don-pascal-saluda 700ms ease-in-out 820ms;
+  }
+  /* Sin opacidad: así axe nunca mide el contraste de un texto a medias. El bocadillo sale
+     de la boca (su pico, a la derecha) y la insignia del horario, de su icono */
+  .hero-bocadillo {
+    transform-origin: 100% 50%;
+    animation: brota var(--mov-brota) var(--curva-rebote) 900ms backwards;
+  }
+  .hero-insignia {
+    transform-origin: 1.5rem 50%;
+    animation: brota var(--mov-brota) var(--curva-rebote) 1150ms backwards;
+  }
+
+  /* Vaivén leve de las insignias: solo en escritorio con puntero fino, y en pausa cuando el
+     hero no se ve (src/scripts/movimiento.ts pone data-fuera) */
+  @media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+    @keyframes vaiven {
+      50% {
+        translate: 0 -6px;
+      }
+    }
+    .hero-bocadillo {
+      animation:
+        brota var(--mov-brota) var(--curva-rebote) 900ms backwards,
+        vaiven 5.5s ease-in-out 1.6s infinite;
+    }
+    .hero-insignia {
+      animation:
+        brota var(--mov-brota) var(--curva-rebote) 1150ms backwards,
+        vaiven 6.5s ease-in-out 2.4s infinite;
+    }
+    [data-fuera] :is(.hero-bocadillo, .hero-insignia) {
+      animation-play-state: paused;
+    }
+  }
+
+  /* --- Secciones al hacer scroll ---
+     movimiento.ts solo marca como pendiente lo que está por debajo de la pantalla al cargar, y
+     lo libera al entrar: nada visible desaparece. Las listas se escalonan (como mucho 6 pasos). */
+  [data-revelar] {
+    transition:
+      opacity var(--mov-revelar) var(--curva-suave),
+      translate var(--mov-revelar) var(--curva-suave),
+      scale var(--mov-revelar) var(--curva-suave);
+    transition-delay: calc(min(var(--i, 0), 5) * var(--mov-escalon));
+  }
+  [data-revelar].revelar-pendiente {
+    opacity: 0;
+    translate: 0 var(--mov-recorrido);
+  }
+  /* Las preguntas de ejemplo llegan como mensajes de chat, desde su esquina */
+  [data-revelar='burbuja'] {
+    transform-origin: 0 100%;
+    transition-timing-function: var(--curva-rebote);
+  }
+  [data-revelar='burbuja'].revelar-pendiente {
+    translate: 0 0.5rem;
+    scale: 0.85;
+  }
+
+  /* --- Carrito y chat: se deslizan desde donde se abren ---
+     <dialog> nativo: @starting-style da el estado de entrada y `display`/`overlay` discretos
+     dejan ver la salida antes de que el diálogo deje la capa superior. Cerrar es algo más rápido. */
+  .panel-carrito,
+  .panel-chat {
+    transition:
+      translate var(--mov-panel-salida) var(--curva-suave),
+      display var(--mov-panel-salida) allow-discrete,
+      overlay var(--mov-panel-salida) allow-discrete;
+  }
+  .panel-carrito[open],
+  .panel-chat[open] {
+    transition-duration: var(--mov-panel);
+  }
+  .panel-carrito:not([open]) {
+    translate: 100% 0;
+  }
+  .panel-chat:not([open]) {
+    translate: 0 calc(100% + 1rem);
+  }
+  @starting-style {
+    .panel-carrito[open] {
+      translate: 100% 0;
+    }
+    .panel-chat[open] {
+      translate: 0 calc(100% + 1rem);
+    }
+  }
+  .panel-carrito::backdrop,
+  .panel-chat::backdrop {
+    transition:
+      opacity var(--mov-panel-salida) var(--curva-suave),
+      display var(--mov-panel-salida) allow-discrete,
+      overlay var(--mov-panel-salida) allow-discrete;
+    opacity: 0;
+  }
+  .panel-carrito[open]::backdrop,
+  .panel-chat[open]::backdrop {
+    transition-duration: var(--mov-panel);
+    opacity: 1;
+  }
+  @starting-style {
+    .panel-carrito[open]::backdrop,
+    .panel-chat[open]::backdrop {
+      opacity: 0;
+    }
+  }
+}
+
+/* Con reduced-motion no hay animaciones: ni las de arriba ni las transiciones de hover */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  ::backdrop {
+    transition: none !important;
+  }
+}
+
+@media print {
+  [data-revelar].revelar-pendiente {
+    opacity: 1;
+    translate: none;
   }
 }

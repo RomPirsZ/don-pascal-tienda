@@ -16,8 +16,8 @@ const fondos = ['bg-maiz', 'bg-aji', 'bg-hoja', 'bg-pradera'];
 ---
 
 <section id="ofertas" class="contenedor py-16 lg:py-20" aria-labelledby="ofertas-titulo">
-  <h2 id="ofertas-titulo" class="text-titulo font-bold">{t('ofertas.titulo')}</h2>
-  <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+  <h2 id="ofertas-titulo" data-revelar class="text-titulo font-bold">{t('ofertas.titulo')}</h2>
+  <ul data-revelar-lista class="mt-8 grid gap-4 sm:grid-cols-2">
     {
       productos.map((p, i) => {
         const foto = fotoProducto(p.slug);
@@ -36,7 +36,7 @@ const fondos = ['bg-maiz', 'bg-aji', 'bg-hoja', 'bg-pradera'];
                 imagen={foto}
                 alt=""
                 sizes="(min-width: 40rem) 12rem, 38vw"
-                class="aspect-square w-[38%] max-w-48 shrink-0 rounded-control object-cover shadow-tarjeta transition-transform duration-300 group-hover:-rotate-2 group-hover:scale-[1.03]"
+                class="aspect-square w-[38%] max-w-48 shrink-0 rounded-control object-cover shadow-tarjeta transition-transform duration-250 ease-suave group-hover:-rotate-2 group-hover:scale-[1.03]"
               />
             )}
           </li>

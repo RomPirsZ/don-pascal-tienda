@@ -12,7 +12,7 @@ const { productos } = Astro.props;
 ---
 
 <section id="al-mayor" class="sobre-monte bg-monte py-16 text-papel lg:py-20" aria-labelledby="mayor-titulo">
-  <div class="contenedor grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center">
+  <div data-revelar-lista class="contenedor grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center">
     <div>
       <h2 id="mayor-titulo" class="text-titulo font-bold">{t('mayor.titulo')}</h2>
       <p class="mt-4 max-w-[36rem] text-lg text-sobre-monte-suave">{t('mayor.texto')}</p>

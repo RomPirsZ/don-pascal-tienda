@@ -10,8 +10,8 @@ const pasos = [
 ---
 
 <section id="como-pedir" class="contenedor py-16 lg:py-20" aria-labelledby="como-titulo">
-  <h2 id="como-titulo" class="text-titulo font-bold">{t('como.titulo')}</h2>
-  <ol class="mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
+  <h2 id="como-titulo" data-revelar class="text-titulo font-bold">{t('como.titulo')}</h2>
+  <ol data-revelar-lista class="mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
     {
       pasos.map((p, i) => (
         <li class="relative flex gap-4 md:flex-col">

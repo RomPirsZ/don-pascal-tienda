@@ -18,7 +18,7 @@ const pedir = producto.disponible ? enlaceWhatsApp(mensajeProducto(producto, tas
 const ficha = `/productos/${producto.slug}/`;
 ---
 
-<article class="group relative flex flex-col rounded-tarjeta bg-papel p-3 shadow-tarjeta transition-shadow duration-200 hover:shadow-flotante">
+<article class="group relative flex flex-col rounded-tarjeta bg-papel p-3 shadow-tarjeta transition-shadow duration-200 ease-suave hover:shadow-flotante">
   <div class="relative overflow-hidden rounded-control bg-superficie">
     {
       foto && (
@@ -26,7 +26,7 @@ const ficha = `/productos/${producto.slug}/`;
           imagen={foto}
           alt=""
           sizes="(min-width: 64rem) 16rem, (min-width: 40rem) 30vw, 45vw"
-          class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          class="aspect-square w-full object-cover transition-transform duration-250 ease-suave group-hover:scale-[1.03]"
         />
       )
     }

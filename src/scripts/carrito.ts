@@ -5,6 +5,7 @@ import { t } from '../i18n';
 import { anadir, fijarCantidad, mensajePedido, normalizar, quitar, resumir, type Linea, type ProductoCarrito } from '../lib/carrito';
 import { formatoBs, formatoUsd, precioUnitario } from '../lib/precios';
 import { enlaceWhatsApp } from '../lib/whatsapp';
+import { pulsoContador } from './movimiento';
 
 interface Datos {
   tasa: number;
@@ -126,6 +127,7 @@ export function iniciarCarrito(): void {
     if (botonAnadir) {
       const slug = botonAnadir.dataset['anadir']!;
       cambiar(anadir(lineas, slug));
+      for (const contador of document.querySelectorAll('[data-carrito-cantidad]')) pulsoContador(contador);
       const nombre = datos.productos.find((p) => p.slug === slug)?.nombre ?? '';
       anuncio.textContent = t('carrito.anadido', { nombre });
       return;
