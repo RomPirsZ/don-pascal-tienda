@@ -89,10 +89,16 @@ export async function atenderChat(request: Request, { env, limitador, catalogo, 
     return responderJson({ error: 'limite' }, { 'Retry-After': String(limite.retryAfter) });
   }
 
-  const faltan = ['ANTHROPIC_API_KEY', 'SUPABASE_URL', 'SUPABASE_PUBLISHABLE_KEY'].filter((clave) => !ajuste(clave));
+  const faltan = ['SUPABASE_URL', 'SUPABASE_PUBLISHABLE_KEY'].filter((clave) => !ajuste(clave));
   if (faltan.length > 0) {
     log('error', 'configuracion-incompleta', { faltan });
     return responderJson({ error: 'servidor' });
+  }
+  // Sin clave de Claude (la demo sin crédito en la API, decisión del usuario 2026-11-15): el chat
+  // dice que Don Pascal no puede responder y remite a WhatsApp, sin contar ni apuntar nada
+  if (!ajuste('ANTHROPIC_API_KEY')) {
+    log('warn', 'claude-sin-clave');
+    return responderJson({ error: 'no-disponible' });
   }
   const supabase = { url: ajuste('SUPABASE_URL'), key: ajuste('SUPABASE_PUBLISHABLE_KEY'), fetch };
 

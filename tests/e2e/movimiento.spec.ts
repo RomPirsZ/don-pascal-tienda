@@ -37,7 +37,9 @@ test.describe('con movimiento', () => {
     // El nombre de la animación, no la animación en curso: en una máquina lenta ya habría terminado
     await expect(page.locator('.hero-don-pascal')).toHaveCSS('animation-name', /don-pascal-sube/);
     // El texto del hero llega en cascada: titular, apoyo, buscador, enlace y aviso
-    await expect(page.locator('#hero-titulo > span').first()).toHaveCSS('animation-name', 'texto-llega');
+    // El titular y el apoyo se enfocan sin partir de invisibles (el LCP no espera, E16); el buscador aparece
+    await expect(page.locator('#hero-titulo > span').first()).toHaveCSS('animation-name', 'texto-enfoca');
+    await expect(page.locator('.hero-entrada > :nth-child(3)')).toHaveCSS('animation-name', 'texto-llega');
     await expect(page.locator('.hero-entrada > form, .hero-entrada > div').first()).toHaveCSS('animation-delay', '0.24s');
 
     // Nada de lo que se ve al cargar queda escondido; lo de abajo espera su turno

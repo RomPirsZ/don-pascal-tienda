@@ -203,6 +203,15 @@
   /* El texto del hero llega antes que él, de arriba abajo: las dos líneas del titular, la
      frase de apoyo, el buscador, el enlace al chat y el aviso. Aparición de texto de la escala
      (500 ms, 12 px, desenfoque de 3 px, ease-in-out) escalonada 80 ms (pocos elementos grandes) */
+  /* El titular y la frase de apoyo no parten de invisibles: uno de los dos es lo más grande de
+     la primera pantalla (el LCP de Lighthouse) y una opacidad 0 retrasaba su medida ~0,8 s (E16).
+     Llegan enfocándose; el buscador, el enlace y el aviso, además, aparecen. */
+  @keyframes texto-enfoca {
+    from {
+      translate: 0 var(--mov-recorrido);
+      filter: blur(3px);
+    }
+  }
   @keyframes texto-llega {
     from {
       opacity: 0;
@@ -211,7 +220,10 @@
     }
   }
   .hero-entrada h1 > span,
-  .hero-entrada > :not(h1) {
+  .hero-entrada > :nth-child(2) {
+    animation: texto-enfoca var(--mov-revelar) ease-in-out backwards;
+  }
+  .hero-entrada > :nth-child(n + 3) {
     animation: texto-llega var(--mov-revelar) ease-in-out backwards;
   }
   .hero-entrada h1 > span:nth-child(2) {
@@ -256,6 +268,22 @@
   /* --- Secciones al hacer scroll ---
      movimiento.ts solo marca como pendiente lo que está por debajo de la pantalla al cargar, y
      lo libera al entrar: nada visible desaparece. Las listas se escalonan (como mucho 6 pasos). */
+  /* Índice del escalonado en CSS, sin escribir estilos desde el JS (como mucho 5 pasos) */
+  [data-revelar-lista] > :nth-child(2) {
+    --i: 1;
+  }
+  [data-revelar-lista] > :nth-child(3) {
+    --i: 2;
+  }
+  [data-revelar-lista] > :nth-child(4) {
+    --i: 3;
+  }
+  [data-revelar-lista] > :nth-child(5) {
+    --i: 4;
+  }
+  [data-revelar-lista] > :nth-child(n + 6) {
+    --i: 5;
+  }
   [data-revelar] {
     transition:
       opacity var(--mov-revelar) var(--curva-suave),

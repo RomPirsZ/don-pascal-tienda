@@ -250,7 +250,18 @@ describe('límites', () => {
 });
 
 describe('errores del servidor', () => {
-  it.each(['ANTHROPIC_API_KEY', 'SUPABASE_URL', 'SUPABASE_PUBLISHABLE_KEY'])('500 y log si falta %s', async (variable) => {
+  it('503 «no-disponible» sin la clave de Claude: remite a WhatsApp sin contar ni apuntar nada', async () => {
+    const env: Record<string, unknown> = { ...ENV };
+    delete env['ANTHROPIC_API_KEY'];
+    const { enviar, crear, log, fetch } = preparar({ env });
+    expect(await leer(await enviar(peticion(VALIDO)))).toEqual({ status: 503, cuerpo: { error: 'no-disponible' } });
+    expect(crear).not.toHaveBeenCalled();
+    expect(log).toHaveBeenCalledWith('warn', 'claude-sin-clave');
+    // Solo la verificación de Turnstile: ni el tope de Supabase ni chat_uso
+    expect(fetch.mock.calls.every(([url]) => String(url).includes('challenges.cloudflare.com'))).toBe(true);
+  });
+
+  it.each(['SUPABASE_URL', 'SUPABASE_PUBLISHABLE_KEY'])('500 y log si falta %s', async (variable) => {
     const env: Record<string, unknown> = { ...ENV };
     delete env[variable];
     const { enviar, crear, log } = preparar({ env });

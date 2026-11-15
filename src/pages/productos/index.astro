@@ -59,7 +59,9 @@ const chip = 'inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font
     </div>
   </section>
 
-  <section class="contenedor py-10 lg:py-14" aria-label={t('catalogo.resultados')}>
+  <section class="contenedor py-10 lg:py-14" aria-labelledby="resultados-titulo">
+    <!-- Título de la sección para el lector de pantalla: las tarjetas son h3 y cuelgan de él (E16, heading-order) -->
+    <h2 id="resultados-titulo" class="sr-only">{t('catalogo.resultados')}</h2>
     <p class="text-tinta-suave" role="status">{cantidad}</p>
     {
       productos.length > 0 ? (

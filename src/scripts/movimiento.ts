@@ -2,19 +2,23 @@
 // - Secciones al hacer scroll: solo se esconde lo que está por debajo de la pantalla al cargar,
 //   y se muestra al entrar. Sin JS, si falla o con reduced-motion, todo está visible desde el
 //   principio (constitución I y II).
-// - Las listas marcadas con data-revelar-lista se escalonan: cada hijo recibe su índice.
+// - Las listas marcadas con data-revelar-lista se escalonan (el índice lo pone el CSS).
 // - El vaivén de las insignias del hero se pausa cuando el hero no se ve.
 
 export function iniciarMovimiento(): void {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  // Después de pintar y en un momento libre: no compite con la primera pantalla (E16, Lighthouse).
+  // Para entonces solo se esconde lo que siga por debajo de la pantalla, así que nada visible parpadea.
+  if ('requestIdleCallback' in window) requestIdleCallback(empezar, { timeout: 600 });
+  else setTimeout(empezar, 200);
+}
 
+function empezar(): void {
+  // El índice del escalonado lo pone el CSS (nth-child); aquí solo se marca qué se revela
   for (const lista of document.querySelectorAll<HTMLElement>('[data-revelar-lista]')) {
-    [...lista.children].forEach((hijo, i) => {
-      if (!(hijo instanceof HTMLElement)) return;
-      hijo.dataset['revelar'] ??= lista.dataset['revelarLista'] || '';
-      // CSSOM, no el atributo style: la CSP no permite estilos en línea
-      hijo.style.setProperty('--i', String(i));
-    });
+    for (const hijo of lista.children) {
+      if (hijo instanceof HTMLElement) hijo.dataset['revelar'] ??= lista.dataset['revelarLista'] || '';
+    }
   }
 
   const alto = window.innerHeight;
