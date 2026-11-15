@@ -96,10 +96,11 @@ La tasa BCV es un valor de ejemplo guardado en `ajustes`, rotulado como tal. Lee
 - modelo `claude-opus-5-5`, elegido por el usuario el 2026-11-14;
 - `output_config: { effort: "low" }`, porque es chat; el pensamiento va siempre activo en este modelo y no se configura;
 - `max_tokens: 4000`, sin streaming, porque `price-guard` necesita la respuesta entera;
-- caché: las instrucciones y las herramientas son texto fijo y van con `cache_control`; nada variable (fecha, tasa) en esa parte;
+- caché: las instrucciones y las herramientas son texto fijo y van con `cache_control`; nada variable (fecha, tasa) en esa parte. Además, la caché automática (`cache_control` en la petición) reaprovecha la conversación entre una vuelta de herramientas y la siguiente;
 - `fallbacks: "default"` con la beta `server-side-fallback-2026-07-01`: si el modelo rechaza la petición, la repite otro modelo. Se comprueba `stop_reason` antes de leer el contenido;
 - `tool_choice: auto` (Opus 5.5 no admite forzar una herramienta) y herramientas con `strict: true`;
-- **como mucho 4 vueltas** de herramientas por pregunta; si se pasa, respuesta segura.
+- **como mucho 4 vueltas** de herramientas por pregunta; si se pasa, respuesta segura;
+- `responder()` (E09) devuelve el texto o el motivo para no enviarlo (`rechazo`, `vueltas`, `corte`, `sin-texto` o `cifras`, este último ya con `price-guard` aplicado), y quien llama (web o WhatsApp) pone la respuesta segura y lo registra.
 
 **Herramientas** (`asistente/herramientas.ts`), todas de solo lectura sobre el catálogo:
 
@@ -124,7 +125,7 @@ La tasa BCV es un valor de ejemplo guardado en `ajustes`, rotulado como tal. Lee
 - extrae de la respuesta toda cifra con marca de moneda ($, US$, USD, dólares, Bs, bolívares, VES), todo porcentaje y todo número decimal; los enteros sueltos (cantidades, horas, fechas, gramos) no se revisan;
 - las normaliza (`1.234,56` y `1234.56` son lo mismo); una cifra con moneda que no se puede leer, o con dígitos de otros alfabetos, se bloquea;
 - cada cifra tiene que estar entre las devueltas por las herramientas **en esa misma petición**, y **con la misma moneda**: «$ 10» no pasa porque 10 sea un mínimo al mayor, ni «$ 1.185,11» porque esa cifra sea en bolívares. Por eso las herramientas (E09) devuelven los precios, totales, la tasa y las ofertas ya formateados con su moneda («$ 1,30», «Bs 1.185,11», «$ 1 = Bs 911,62», «10 %»); un número sin moneda en sus resultados solo confirma decimales sueltos;
-- si una no está, la respuesta se sustituye por una segura: «No tengo ese dato confirmado; escríbenos por WhatsApp» con el enlace, y se registra `guard-blocked` sin el texto del visitante. La función (E08) devuelve las cifras sin confirmar; la sustitución y el registro los hace `/api/chat` (E10);
+- si una no está, la respuesta se sustituye por una segura: «No tengo ese dato confirmado; escríbenos por WhatsApp» con el enlace, y se registra `guard-blocked` sin el texto del visitante. `price-guard` (E08) devuelve las cifras sin confirmar, `responder()` (E09) lo aplica a cada respuesta y la sustitución y el registro los hace quien llama: `/api/chat` (E10) y `/api/whatsapp` (E13);
 - así, ni un historial manipulado ni instrucciones inyectadas consiguen colar un precio: solo pasan las cifras de las herramientas de ese turno.
 
 **`/api/chat`** (POST JSON):
