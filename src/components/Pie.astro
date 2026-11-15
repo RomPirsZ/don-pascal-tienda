@@ -17,7 +17,8 @@ const [anio, mes, dia] = (ajustes?.tasaFecha ?? '').split('-');
       <p class="text-2xl font-bold">{t('sitio.nombre')}</p>
       <p class="mt-2 text-sobre-monte-suave">{t('pie.lema')}</p>
     </div>
-    <div class="space-y-2 text-sm text-sobre-monte-suave">
+    <!-- Medida de lectura (revisión de Taste en E15): el texto legal no pasa de ~65 caracteres -->
+    <div class="max-w-[65ch] space-y-2 text-sm text-sobre-monte-suave">
       <p>{t('pie.concepto')}</p>
       <p>{t('pie.creditos')}</p>
       {ajustes && <p class="precio">{t('pie.tasa', { tasa: formatoBs(Math.round(ajustes.tasaBcv * 100)), fecha: `${dia}/${mes}/${anio}` })}</p>}

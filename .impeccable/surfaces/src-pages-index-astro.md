@@ -13,7 +13,7 @@ related_targets: []
 
 THESIS: La tienda de barrio hecha con el oficio de un e-commerce de comida moderno. Es el estándar de la categoría ejecutado sin ironía, como en los dos Dribbble de referencia («Food Ordering», «Grocery shop»), y la vara de acabado son ellos. Lo propio está en los datos (precio en $ y Bs, al mayor) y en Don Pascal.
 
-OWN-WORLD: Hero y pie en verde profundo (#1E4D3A). Amarillo maíz (#FFC93C) para la acción, con tinta oscura. Verde hoja (#5BAA3C, el del delantal) para acentos. Banda verde claro (#DCEFD0) en categorías. Naranja ají (#F26B3A) solo en banners de oferta. Fondo blanco y superficie #F5F8F3. Poppins: titulares 700 y 300 en dos pesos; texto 400. Tarjetas con radio de 20 px y sombra suave; botones e insignias en píldora; insignias blancas flotantes con icono.
+OWN-WORLD: Hero y pie en verde profundo (#1E4D3A). Amarillo maíz (#FFC93C) para la acción, con tinta oscura. Verde hoja (#5BAA3C, el del delantal) para acentos. Banda verde claro (#DCEFD0) en categorías. Naranja ají (#F26B3A) solo en banners de oferta. Fondo blanco y superficie #F4F7F2. Poppins: titulares 700 y 300 en dos pesos; texto 400; 600 en etiquetas, botones y navegación. Tarjetas con radio de 20 px y sombra suave; botones e insignias en píldora; insignias blancas flotantes con icono.
 
 STORY: El visitante ve qué vende la tienda y busca de inmediato. Cree que los precios son claros y que puede pedir sin ir. Añade al carrito o le pregunta a Don Pascal.
 

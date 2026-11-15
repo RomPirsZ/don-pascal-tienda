@@ -1,0 +1,508 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-15T17:37:41+00:00",
+  "title": "Design System: Don Pascal",
+  "extensions": {
+    "colorMeta": {
+      "monte": {
+        "role": "primary",
+        "displayName": "Verde monte",
+        "canonical": "#1e4d3a",
+        "tonalRamp": [
+          "oklch(15% 0.039 164)",
+          "oklch(26% 0.050 164)",
+          "oklch(38% 0.061 164)",
+          "oklch(49% 0.050 164)",
+          "oklch(61% 0.039 164)",
+          "oklch(72% 0.028 164)",
+          "oklch(84% 0.017 164)",
+          "oklch(95% 0.009 164)"
+        ]
+      },
+      "monte-claro": {
+        "role": "secondary",
+        "displayName": "Monte claro",
+        "canonical": "#2c6a50",
+        "tonalRamp": [
+          "oklch(15% 0.037 163)",
+          "oklch(26% 0.051 163)",
+          "oklch(38% 0.065 163)",
+          "oklch(49% 0.075 163)",
+          "oklch(61% 0.061 163)",
+          "oklch(72% 0.047 163)",
+          "oklch(84% 0.033 163)",
+          "oklch(95% 0.019 163)"
+        ]
+      },
+      "hoja": {
+        "role": "secondary",
+        "displayName": "Verde hoja",
+        "canonical": "#5baa3c",
+        "tonalRamp": [
+          "oklch(15% 0.029 138)",
+          "oklch(26% 0.060 138)",
+          "oklch(38% 0.090 138)",
+          "oklch(49% 0.120 138)",
+          "oklch(61% 0.150 138)",
+          "oklch(72% 0.150 138)",
+          "oklch(84% 0.120 138)",
+          "oklch(95% 0.090 138)"
+        ]
+      },
+      "hoja-texto": {
+        "role": "secondary",
+        "displayName": "Verde hoja como texto",
+        "canonical": "#2e7a2e",
+        "tonalRamp": [
+          "oklch(15% 0.056 143)",
+          "oklch(26% 0.080 143)",
+          "oklch(38% 0.105 143)",
+          "oklch(49% 0.129 143)",
+          "oklch(61% 0.114 143)",
+          "oklch(72% 0.090 143)",
+          "oklch(84% 0.065 143)",
+          "oklch(95% 0.041 143)"
+        ]
+      },
+      "pradera": {
+        "role": "secondary",
+        "displayName": "Verde pradera",
+        "canonical": "#dcefd0",
+        "tonalRamp": [
+          "oklch(15% 0.007 133)",
+          "oklch(26% 0.007 133)",
+          "oklch(38% 0.007 133)",
+          "oklch(49% 0.014 133)",
+          "oklch(61% 0.022 133)",
+          "oklch(72% 0.031 133)",
+          "oklch(84% 0.039 133)",
+          "oklch(95% 0.044 133)"
+        ]
+      },
+      "maiz": {
+        "role": "primary",
+        "displayName": "Amarillo maíz",
+        "canonical": "#ffc93c",
+        "tonalRamp": [
+          "oklch(15% 0.024 86)",
+          "oklch(26% 0.024 86)",
+          "oklch(38% 0.036 86)",
+          "oklch(49% 0.065 86)",
+          "oklch(61% 0.094 86)",
+          "oklch(72% 0.124 86)",
+          "oklch(84% 0.153 86)",
+          "oklch(95% 0.137 86)"
+        ]
+      },
+      "aji": {
+        "role": "tertiary",
+        "displayName": "Naranja ají",
+        "canonical": "#f26b3a",
+        "tonalRamp": [
+          "oklch(15% 0.027 40)",
+          "oklch(26% 0.058 40)",
+          "oklch(38% 0.091 40)",
+          "oklch(49% 0.123 40)",
+          "oklch(61% 0.156 40)",
+          "oklch(72% 0.168 40)",
+          "oklch(84% 0.135 40)",
+          "oklch(95% 0.103 40)"
+        ]
+      },
+      "aji-texto": {
+        "role": "tertiary",
+        "displayName": "Ají como texto",
+        "canonical": "#b8401a",
+        "tonalRamp": [
+          "oklch(15% 0.062 37)",
+          "oklch(26% 0.092 37)",
+          "oklch(38% 0.122 37)",
+          "oklch(49% 0.151 37)",
+          "oklch(61% 0.144 37)",
+          "oklch(72% 0.114 37)",
+          "oklch(84% 0.085 37)",
+          "oklch(95% 0.055 37)"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#14251c",
+        "tonalRamp": [
+          "oklch(15% 0.024 160)",
+          "oklch(26% 0.028 160)",
+          "oklch(38% 0.023 160)",
+          "oklch(49% 0.017 160)",
+          "oklch(61% 0.012 160)",
+          "oklch(72% 0.007 160)",
+          "oklch(84% 0.004 160)",
+          "oklch(95% 0.004 160)"
+        ]
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Tinta suave",
+        "canonical": "#4a5d52",
+        "tonalRamp": [
+          "oklch(15% 0.015 160)",
+          "oklch(26% 0.020 160)",
+          "oklch(38% 0.026 160)",
+          "oklch(49% 0.028 160)",
+          "oklch(61% 0.022 160)",
+          "oklch(72% 0.017 160)",
+          "oklch(84% 0.012 160)",
+          "oklch(95% 0.006 160)"
+        ]
+      },
+      "papel": {
+        "role": "neutral",
+        "displayName": "Papel",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.000 90)",
+          "oklch(26% 0.000 90)",
+          "oklch(38% 0.000 90)",
+          "oklch(49% 0.000 90)",
+          "oklch(61% 0.000 90)",
+          "oklch(72% 0.000 90)",
+          "oklch(84% 0.000 90)",
+          "oklch(95% 0.000 90)"
+        ]
+      },
+      "superficie": {
+        "role": "neutral",
+        "displayName": "Superficie",
+        "canonical": "#f4f7f2",
+        "tonalRamp": [
+          "oklch(15% 0.007 132)",
+          "oklch(26% 0.007 132)",
+          "oklch(38% 0.007 132)",
+          "oklch(49% 0.007 132)",
+          "oklch(61% 0.007 132)",
+          "oklch(72% 0.007 132)",
+          "oklch(84% 0.007 132)",
+          "oklch(95% 0.007 132)"
+        ]
+      },
+      "sobre-monte-suave": {
+        "role": "neutral",
+        "displayName": "Texto suave sobre el monte",
+        "canonical": "#c9ddd1",
+        "tonalRamp": [
+          "oklch(15% 0.004 160)",
+          "oklch(26% 0.004 160)",
+          "oklch(38% 0.005 160)",
+          "oklch(49% 0.010 160)",
+          "oklch(61% 0.015 160)",
+          "oklch(72% 0.020 160)",
+          "oklch(84% 0.025 160)",
+          "oklch(95% 0.024 160)"
+        ]
+      },
+      "linea": {
+        "role": "neutral",
+        "displayName": "Línea",
+        "canonical": "#d5dfd6",
+        "tonalRamp": [
+          "oklch(15% 0.002 148)",
+          "oklch(26% 0.002 148)",
+          "oklch(38% 0.003 148)",
+          "oklch(49% 0.006 148)",
+          "oklch(61% 0.009 148)",
+          "oklch(72% 0.012 148)",
+          "oklch(84% 0.015 148)",
+          "oklch(95% 0.015 148)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display fuerte",
+        "purpose": "Primera línea del titular del hero, 700."
+      },
+      "display-ligero": {
+        "displayName": "Display ligero",
+        "purpose": "Segunda línea del titular del hero, 300, en pradera sobre el monte."
+      },
+      "headline": {
+        "displayName": "Título",
+        "purpose": "Títulos de sección y nombre del producto en la ficha."
+      },
+      "title": {
+        "displayName": "Subtítulo",
+        "purpose": "Pasos, título del carrito, relacionados."
+      },
+      "body": {
+        "displayName": "Cuerpo",
+        "purpose": "Texto corrido."
+      },
+      "label": {
+        "displayName": "Pequeño",
+        "purpose": "Presentación, precio en Bs, chips, insignias, avisos."
+      },
+      "mini": {
+        "displayName": "Mini",
+        "purpose": "Lo más pequeño que se lee (13 px): contadores, números de pasos, bocadillo móvil."
+      },
+      "precio": {
+        "displayName": "Precio",
+        "purpose": "Precio grande de la ficha y total del carrito, con cifras tabulares."
+      }
+    },
+    "shadows": [
+      {
+        "name": "tarjeta",
+        "value": "0 10px 28px -14px color-mix(in srgb, var(--tinta) 30%, transparent)",
+        "purpose": "Tarjetas, fotos de banner y burbujas del chat en reposo."
+      },
+      {
+        "name": "flotante",
+        "value": "0 14px 36px -12px color-mix(in srgb, var(--tinta) 40%, transparent)",
+        "purpose": "Buscador, insignias, botón y panel del chat, menú móvil; hover de tarjetas."
+      }
+    ],
+    "motion": [
+      {
+        "name": "curva-suave",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Abrir, cerrar, llegar, brotar y hover. Sin rebote."
+      },
+      {
+        "name": "curva-llegada",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Solo la llegada de Don Pascal en el hero."
+      },
+      {
+        "name": "mov-panel",
+        "value": "400ms",
+        "purpose": "Abrir el carrito o el chat."
+      },
+      {
+        "name": "mov-panel-salida",
+        "value": "350ms",
+        "purpose": "Cerrarlos."
+      },
+      {
+        "name": "mov-revelar",
+        "value": "500ms",
+        "purpose": "Aparición de contenido (hero y scroll)."
+      },
+      {
+        "name": "mov-brota",
+        "value": "500ms",
+        "purpose": "Aparición de una insignia desde escala 0."
+      },
+      {
+        "name": "mov-escalon",
+        "value": "40ms",
+        "purpose": "Escalonado por elemento de lista, hasta 6 pasos."
+      },
+      {
+        "name": "mov-recorrido",
+        "value": "12px",
+        "purpose": "Lo que sube un bloque al aparecer."
+      },
+      {
+        "name": "texto-llega",
+        "value": "opacity + translate 12px + blur(3px), 500ms ease-in-out, escalón 80ms",
+        "purpose": "Cascada del texto del hero."
+      },
+      {
+        "name": "pulsar",
+        "value": "scale 0.95, 150ms",
+        "purpose": "Respuesta al pulsar botones."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none; transition: none",
+        "purpose": "Con prefers-reduced-motion: reduce nada se mueve (constitución II)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "contenedor-max",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "boton-principal",
+      "description": "La acción de cada contexto: maíz con tinta, en píldora.",
+      "html": "<button class=\"ds-btn-principal\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg>Buscar</button>",
+      "css": ".ds-btn-principal{display:inline-flex;align-items:center;gap:8px;background:var(--maiz,#ffc93c);color:var(--tinta,#14251c);font-family:var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);font-weight:600;font-size:16px;padding:12px 24px;border:0;border-radius:9999px;cursor:pointer;transition:scale 150ms cubic-bezier(0.22,1,0.36,1)}.ds-btn-principal:active{scale:0.95}.ds-btn-principal:focus-visible{outline:3px solid var(--monte,#1e4d3a);outline-offset:3px}"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "boton-secundario",
+      "description": "La alternativa por WhatsApp junto a la principal: monte con papel.",
+      "html": "<a href=\"#\" class=\"ds-btn-secundario\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\"/></svg>Pedir por WhatsApp</a>",
+      "css": ".ds-btn-secundario{display:inline-flex;align-items:center;gap:8px;background:var(--monte,#1e4d3a);color:var(--papel,#fff);font-family:var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);font-weight:600;font-size:16px;padding:12px 24px;border-radius:9999px;text-decoration:none;transition:scale 150ms cubic-bezier(0.22,1,0.36,1)}.ds-btn-secundario:active{scale:0.95}.ds-btn-secundario:focus-visible{outline:3px solid var(--monte,#1e4d3a);outline-offset:3px}"
+    },
+    {
+      "name": "Chip de descuento",
+      "kind": "chip",
+      "refersTo": "chip-descuento",
+      "description": "El ají fuera de los banners: solo el descuento sobre la foto.",
+      "html": "<span class=\"ds-chip-descuento\">-15 %</span>",
+      "css": ".ds-chip-descuento{display:inline-block;background:var(--aji,#f26b3a);color:var(--tinta,#14251c);font-family:var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);font-weight:700;font-size:14px;padding:2px 10px;border-radius:9999px}"
+    },
+    {
+      "name": "Sugerencia del chat",
+      "kind": "chip",
+      "refersTo": "chip-sugerencia",
+      "description": "Pregunta de ejemplo en el chat: pradera, y hoja al hover.",
+      "html": "<button class=\"ds-chip-sugerencia\">¿Tienen harina al mayor?</button>",
+      "css": ".ds-chip-sugerencia{background:var(--pradera,#dcefd0);color:var(--monte,#1e4d3a);font-family:var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);font-weight:600;font-size:14px;padding:8px 16px;border:0;border-radius:9999px;cursor:pointer}.ds-chip-sugerencia:hover{background:var(--hoja,#5baa3c);color:var(--tinta,#14251c)}.ds-chip-sugerencia:focus-visible{outline:3px solid var(--monte,#1e4d3a);outline-offset:3px}"
+    },
+    {
+      "name": "Buscador",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Selector, campo y Buscar en una sola píldora flotante desde sm.",
+      "html": "<form class=\"ds-buscador\" role=\"search\"><select class=\"ds-buscador-sel\" aria-label=\"Categoría\"><option>Todas</option></select><input class=\"ds-buscador-campo\" type=\"search\" placeholder=\"Busca harina, queso, refresco…\" aria-label=\"Buscar\"><button class=\"ds-buscador-btn\" type=\"submit\">Buscar</button></form>",
+      "css": ".ds-buscador{display:flex;align-items:center;gap:8px;max-width:36rem;background:var(--papel,#fff);padding:8px;border-radius:9999px;box-shadow:0 14px 36px -12px color-mix(in srgb,#14251c 40%,transparent);font-family:var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif)}.ds-buscador-sel{appearance:none;border:0;border-right:1px solid var(--tinta-suave,#4a5d52);background:transparent;color:var(--tinta,#14251c);font:600 14px var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);padding:10px 16px}.ds-buscador-campo{flex:1;min-width:0;border:0;background:transparent;color:var(--tinta,#14251c);font:400 16px var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);padding:10px 16px}.ds-buscador-campo::placeholder{color:var(--tinta-suave,#4a5d52)}.ds-buscador-campo:focus-visible,.ds-buscador-sel:focus-visible,.ds-buscador-btn:focus-visible{outline:3px solid var(--monte,#1e4d3a);outline-offset:3px;border-radius:9999px}.ds-buscador-btn{background:var(--maiz,#ffc93c);color:var(--tinta,#14251c);font:600 16px var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);padding:10px 24px;border:0;border-radius:9999px;cursor:pointer}.ds-buscador-btn:active{scale:0.95}"
+    },
+    {
+      "name": "Tarjeta de producto",
+      "kind": "card",
+      "refersTo": "tarjeta-producto",
+      "description": "Foto sobre superficie, nombre, presentación, precio en $ y Bs, y Añadir en maíz.",
+      "html": "<article class=\"ds-tarjeta\"><div class=\"ds-tarjeta-foto\"><span class=\"ds-tarjeta-chip\">-15 %</span></div><h3 class=\"ds-tarjeta-nombre\">Harina de trigo</h3><p class=\"ds-tarjeta-pres\">Paquete de 1 kg</p><div class=\"ds-tarjeta-pie\"><p class=\"ds-tarjeta-precio\"><span>$&nbsp;1,30</span><small>Bs&nbsp;1.185,11</small></p><button class=\"ds-tarjeta-anadir\" aria-label=\"Añadir\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg></button></div></article>",
+      "css": ".ds-tarjeta{width:15rem;background:var(--papel,#fff);color:var(--tinta,#14251c);font-family:var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);padding:12px;border-radius:20px;box-shadow:0 10px 28px -14px color-mix(in srgb,#14251c 30%,transparent);transition:box-shadow 200ms cubic-bezier(0.22,1,0.36,1)}.ds-tarjeta:hover{box-shadow:0 14px 36px -12px color-mix(in srgb,#14251c 40%,transparent)}.ds-tarjeta-foto{position:relative;aspect-ratio:1;background:var(--superficie,#f4f7f2);border-radius:14px}.ds-tarjeta-chip{position:absolute;top:8px;left:8px;background:var(--aji,#f26b3a);color:var(--tinta,#14251c);font-weight:700;font-size:14px;padding:2px 10px;border-radius:9999px}.ds-tarjeta-nombre{margin:12px 4px 0;font-size:16px;font-weight:600;letter-spacing:-0.02em}.ds-tarjeta-pres{margin:4px 4px 0;font-size:14px;color:var(--tinta-suave,#4a5d52)}.ds-tarjeta-pie{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;padding:8px 4px 0}.ds-tarjeta-precio{margin:0;display:flex;flex-direction:column;font-variant-numeric:tabular-nums;line-height:1.25}.ds-tarjeta-precio span{font-size:18px;font-weight:700;white-space:nowrap}.ds-tarjeta-precio small{font-size:14px;color:var(--tinta-suave,#4a5d52);white-space:nowrap}.ds-tarjeta-anadir{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:9999px;background:var(--maiz,#ffc93c);color:var(--tinta,#14251c);cursor:pointer}.ds-tarjeta-anadir:active{scale:0.95}.ds-tarjeta-anadir:focus-visible{outline:3px solid var(--monte,#1e4d3a);outline-offset:3px}"
+    },
+    {
+      "name": "Banners de oferta",
+      "kind": "custom",
+      "refersTo": "banner-oferta-maiz",
+      "description": "La rotación maíz, ají, hoja, pradera; todo el texto en tinta.",
+      "html": "<ul class=\"ds-ofertas\"><li class=\"ds-oferta ds-oferta-maiz\"><p class=\"ds-oferta-pct\">-15 %</p><p class=\"ds-oferta-nombre\">Harina de trigo</p><p class=\"ds-oferta-precio\">$&nbsp;1,10</p></li><li class=\"ds-oferta ds-oferta-aji\"><p class=\"ds-oferta-pct\">-10 %</p><p class=\"ds-oferta-nombre\">Queso llanero</p><p class=\"ds-oferta-precio\">$&nbsp;4,50</p></li><li class=\"ds-oferta ds-oferta-hoja\"><p class=\"ds-oferta-pct\">-20 %</p><p class=\"ds-oferta-nombre\">Azúcar</p><p class=\"ds-oferta-precio\">$&nbsp;0,96</p></li><li class=\"ds-oferta ds-oferta-pradera\"><p class=\"ds-oferta-pct\">-12 %</p><p class=\"ds-oferta-nombre\">Refresco 2 L</p><p class=\"ds-oferta-precio\">$&nbsp;1,85</p></li></ul>",
+      "css": ".ds-ofertas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;font-family:var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);color:var(--tinta,#14251c)}.ds-oferta{border-radius:20px;padding:24px}.ds-oferta-maiz{background:var(--maiz,#ffc93c)}.ds-oferta-aji{background:var(--aji,#f26b3a)}.ds-oferta-hoja{background:var(--hoja,#5baa3c)}.ds-oferta-pradera{background:var(--pradera,#dcefd0)}.ds-oferta-pct{margin:0;font-size:40px;font-weight:700;letter-spacing:-0.02em}.ds-oferta-nombre{margin:8px 0 0;font-size:18px;font-weight:600}.ds-oferta-precio{margin:4px 0 0;font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}"
+    },
+    {
+      "name": "Cabecera",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Monte con papel, enlaces 600 subrayados en maíz al hover, carrito en píldora maíz.",
+      "html": "<header class=\"ds-cabecera\"><span class=\"ds-cabecera-marca\">Don Pascal</span><nav><a href=\"#\">Productos</a><a href=\"#\">Ofertas</a><a href=\"#\">Al mayor</a></nav><button class=\"ds-cabecera-carrito\">Carrito <span>3</span></button></header>",
+      "css": ".ds-cabecera{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;padding:0 24px;background:var(--monte,#1e4d3a);color:var(--papel,#fff);font-family:var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif)}.ds-cabecera-marca{font-size:20px;font-weight:700;letter-spacing:-0.02em}.ds-cabecera nav{display:flex;gap:28px}.ds-cabecera nav a{color:inherit;font-weight:600;text-decoration:none;text-decoration-color:var(--maiz,#ffc93c);text-decoration-thickness:2px;text-underline-offset:0.25em}.ds-cabecera nav a:hover{text-decoration-line:underline}.ds-cabecera a:focus-visible,.ds-cabecera button:focus-visible{outline:3px solid var(--maiz,#ffc93c);outline-offset:3px}.ds-cabecera-carrito{display:inline-flex;align-items:center;gap:8px;background:var(--maiz,#ffc93c);color:var(--tinta,#14251c);font:600 16px var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);padding:10px 16px;border:0;border-radius:9999px}.ds-cabecera-carrito span{display:grid;place-items:center;min-width:24px;padding:0 6px;border-radius:9999px;background:var(--tinta,#14251c);color:var(--papel,#fff);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Insignia flotante",
+      "kind": "custom",
+      "refersTo": "insignia-flotante",
+      "description": "Píldora papel con círculo de icono, sobre el monte del hero.",
+      "html": "<div class=\"ds-insignia-fondo\"><p class=\"ds-insignia\"><span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/></svg></span>Abierto todos los días</p></div>",
+      "css": ".ds-insignia-fondo{background:var(--monte,#1e4d3a);padding:32px}.ds-insignia{display:inline-flex;align-items:center;gap:8px;margin:0;background:var(--papel,#fff);color:var(--tinta,#14251c);font:600 14px var(--font-sans, 'Poppins', ui-sans-serif, system-ui, sans-serif);padding:8px 16px 8px 8px;border-radius:9999px;box-shadow:0 14px 36px -12px color-mix(in srgb,#14251c 40%,transparent)}.ds-insignia span{display:grid;place-items:center;width:32px;height:32px;border-radius:9999px;background:var(--maiz,#ffc93c)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La tienda de barrio con oficio",
+    "overview": "Don Pascal es el abasto de la esquina hecho con el acabado de un e-commerce de comida moderno. El sistema no ironiza ni inventa una categoría nueva: ejecuta a fondo el canon de la tienda de comida en línea (verde profundo, amarillo de acción, tarjetas redondeadas con sombra suave, botones en píldora, insignias blancas flotantes) y pone lo propio en los datos y en el personaje. El precio en $ y en Bs, el «al mayor» y Don Pascal, el comerciante llanero ilustrado, son lo que lo distingue.\n\nLa densidad es la de un catálogo móvil a pleno sol: contraste alto, texto de cuerpo de 16-17 px, objetivos táctiles de 44 px o más, y nada por debajo de 13 px. El verde del monte enmarca la página (cabecera, hero, al mayor, pie y chat) y el blanco del papel lleva el catálogo. El color fuerte se reserva para la acción (maíz) y la oferta (ají y su rotación).\n\nEl movimiento es suave y sin rebote. Hay un solo momento propio, la llegada de Don Pascal en el hero. Todo lo demás explica estado: el contenido que llega, el panel que se abre, el contador que confirma. Con reduced-motion no se mueve nada.",
+    "keyCharacteristics": [
+      "Marco en verde monte, catálogo sobre papel blanco.",
+      "Maíz para la acción principal, siempre con texto en tinta.",
+      "Tarjetas de 20 px con sombra suave teñida de tinta; píldoras para botones, chips e insignias.",
+      "Poppins en dos pesos para el titular (700 y 300) y 400 para el texto.",
+      "Precio en $ y en Bs, con cifras tabulares y un importe que nunca se parte.",
+      "Don Pascal sobre un arco: en el hero, en la 404 y en el chat."
+    ],
+    "rules": [
+      {
+        "name": "La Regla de los Roles",
+        "body": "Los colores existen solo como custom properties en `:root` de `src/styles/global.css` y como utilidades de `@theme inline`. Un componente usa el rol (`bg-maiz`, `text-tinta-suave`), nunca un hex. Los pares de texto y fondo los vigila `tests/unit/tokens.test.ts`.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla de la Tinta sobre Color",
+        "body": "Todo relleno de color vivo (maíz, ají, hoja, pradera) lleva texto en tinta. Nunca blanco sobre maíz, ají u hoja.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla de la Rotación de Ofertas",
+        "body": "Los banners de oferta rotan cuatro fondos en este orden: maíz, ají, hoja, pradera, y vuelven a empezar. Los cuatro llevan todo su texto en tinta (descuento, nombre, presentación y precio en $ y en Bs). El ají es el color de la oferta: fuera de los banners solo aparece como chip de descuento («-15 %») en la tarjeta de producto y en la foto de la ficha.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla del Verde Legible",
+        "body": "Hoja es relleno; hoja-texto es texto. Si un verde tiene que leerse sobre papel o superficie, es hoja-texto.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla del Suelo de 13 px",
+        "body": "`--text-mini` (13 px) es lo más pequeño que se lee. Nada va por debajo: ni contadores, ni notas legales, ni créditos.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla del Importe Entero",
+        "body": "Entre la moneda y la cifra va siempre un espacio duro («$ 1,30», «Bs 1.185,11»), y lo pone el formateador (`formatoUsd` y `formatoBs` en `src/lib/precios.ts`), no el componente ni la traducción. Un importe nunca se parte entre dos líneas, tampoco dentro de una frase que lo interpole.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla de las Cifras en Columna",
+        "body": "Toda cifra de precio, tasa o contador lleva la clase `precio` (`font-variant-numeric: tabular-nums`).",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla de Don Pascal a la Cintura",
+        "body": "Por debajo de 640 px Don Pascal se recorta a la cintura: su caja tiene un alto fijo (16.5rem) con el resto oculto, y el dibujo se desplaza un poco a la derecha. El bocadillo pasa a dos líneas (6.5rem de ancho, 13 px) y pierde su icono.",
+        "section": "layout"
+      },
+      {
+        "name": "La Regla del Suelo de Don Pascal",
+        "body": "Don Pascal siempre está de pie sobre un arco (radio superior completo) que nace del borde inferior de su sección: el monte claro en el hero, la pradera en la 404, donde desde lg se apoya sobre el pie. Nunca flota cortado en mitad del blanco.",
+        "section": "layout"
+      },
+      {
+        "name": "La Regla del Hover que Sube",
+        "body": "Una tarjeta pasa de sombra de tarjeta a sombra flotante al hover (200 ms, curva suave), y su foto crece un 3 o 4 %. No hay otro levantamiento.",
+        "section": "elevation"
+      },
+      {
+        "name": "La Regla de la Curva sin Rebote",
+        "body": "Todo usa la curva suave (`cubic-bezier(0.22, 1, 0.36, 1)`): abrir, cerrar, llegar, brotar y hover. La curva de llegada (`cubic-bezier(0.16, 1, 0.3, 1)`) es solo para la llegada de Don Pascal. Ninguna curva rebota ni se pasa de su destino.",
+        "section": "components"
+      },
+      {
+        "name": "La Regla del Quieto",
+        "body": "Con `prefers-reduced-motion: reduce` no hay ninguna animación ni transición, tampoco las de hover ni las del fondo de los diálogos (constitución II).",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** usar los roles de color de `global.css` en cada componente; un hex nuevo entra primero como token.",
+      "**Do** poner texto en tinta sobre maíz, ají, hoja y pradera.",
+      "**Do** rotar los banners de oferta en el orden maíz, ají, hoja, pradera.",
+      "**Do** formatear todo importe con `formatoUsd` o `formatoBs` (espacio duro incluido) y marcar sus cifras con `precio`.",
+      "**Do** mantener 13 px (`--text-mini`) como el tamaño más pequeño.",
+      "**Do** usar píldora para botones, campos, chips e insignias, y 20 px para tarjetas y banners.",
+      "**Do** dar a cada animación nueva la curva suave y una duración de la escala (`--mov-*`), y comprobar que con reduced-motion queda quieta.",
+      "**Do** apoyar a Don Pascal sobre su arco, nacido del borde de su sección."
+    ],
+    "donts": [
+      "**Don't** usar el ají fuera de los banners de oferta y del chip de descuento.",
+      "**Don't** escribir texto en hoja sobre papel; para eso está hoja-texto.",
+      "**Don't** usar la línea como borde de un control; los controles se bordean en tinta suave.",
+      "**Don't** usar curvas con rebote.",
+      "**Don't** animar propiedades que recalculan el diseño (`width`, `height`, `top`, `left`, `margin`).",
+      "**Don't** esconder al cargar contenido que ya está en pantalla.",
+      "**Don't** usar sombras duras o desplazadas sin desenfoque.",
+      "**Don't** poner cuentas atrás, existencias («quedan 2»), estrellas ni valoraciones en ofertas o tarjetas."
+    ]
+  }
+}
