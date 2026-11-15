@@ -16,9 +16,9 @@ const { categorias, tasa } = Astro.props;
 ---
 
 <section class="sobre-monte relative overflow-hidden bg-monte text-papel" aria-labelledby="hero-titulo">
-  <div class="contenedor grid items-center gap-8 pt-8 lg:grid-cols-[minmax(0,8fr)_minmax(0,5fr)] lg:gap-6 lg:pt-12">
+  <div class="contenedor grid grid-cols-[minmax(0,1fr)] items-center gap-8 pt-8 lg:grid-cols-[minmax(0,8fr)_minmax(0,5fr)] lg:gap-6 lg:pt-12">
     <div class="pb-2 lg:pb-20">
-      <h1 id="hero-titulo" class="text-hero leading-[1.05] tracking-[-0.03em]">
+      <h1 id="hero-titulo" class="text-hero lg:text-hero-lg leading-[1.05] tracking-[-0.03em]">
         <span class="block font-bold">{t('hero.titulo-fuerte')}</span>
         <span class="block font-light text-pradera">{t('hero.titulo-ligero')}</span>
       </h1>

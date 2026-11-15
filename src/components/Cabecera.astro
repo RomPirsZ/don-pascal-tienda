@@ -16,12 +16,12 @@ const enlaces = [
   <div class="contenedor flex h-18 items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-3 no-underline" aria-label={t('nav.inicio')}>
       <Foto imagen={AVATAR} alt="" sizes="2.75rem" class="size-11 rounded-full bg-monte-claro object-cover" loading="eager" />
-      <span class="text-xl font-bold tracking-tight">{t('sitio.nombre')}</span>
+      <span class="text-xl font-bold tracking-tight whitespace-nowrap">{t('sitio.nombre')}</span>
     </a>
 
-    <nav aria-label={t('nav.principal')} class="hidden md:block">
+    <nav aria-label={t('nav.principal')} class="hidden lg:block">
       <ul class="flex items-center gap-7 text-base font-semibold">
-        {enlaces.map((e) => <li><a href={e.href} class="no-underline decoration-maiz decoration-2 hover:underline">{e.texto}</a></li>)}
+        {enlaces.map((e) => <li><a href={e.href} class="whitespace-nowrap no-underline decoration-maiz decoration-2 hover:underline">{e.texto}</a></li>)}
       </ul>
     </nav>
 
@@ -39,7 +39,7 @@ const enlaces = [
         <span data-carrito-unidades-sr class="sr-only">{t('carrito.unidades-sr')}</span>
       </button>
 
-      <details class="group relative md:hidden">
+      <details class="group relative lg:hidden">
         <summary class="grid size-11 cursor-pointer list-none place-items-center rounded-full bg-monte-claro [&::-webkit-details-marker]:hidden" aria-label={t('nav.menu')}>
           <Icono nombre="menu" class="size-6 group-open:hidden" />
           <Icono nombre="cerrar" class="hidden size-6 group-open:block" />

@@ -39,8 +39,11 @@
 
   --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 
-  /* Escala fluida de 390 px a 1440 px; el titular del hero no pasa de 4.5rem */
-  --text-hero: clamp(2.25rem, 1.41rem + 3.43vw, 4.5rem);
+  /* Escala fluida de 390 px a 1440 px; el titular del hero no pasa de 4.5rem. Por debajo de
+     390 px encoge con la pantalla (9.9vw) para que «Repostería y víveres» quepa en una línea */
+  --text-hero: clamp(1.75rem, min(1.41rem + 3.43vw, 9.9vw - 0.2rem), 4.5rem);
+  /* Desde lg el titular comparte fila con Don Pascal (8/13 del ancho): también cabe en dos líneas a 1024 px */
+  --text-hero-lg: clamp(1.75rem, min(1.41rem + 3.43vw, 6.2vw - 0.45rem), 4.5rem);
   --text-titulo: clamp(1.75rem, 1.38rem + 1.52vw, 2.75rem);
   --text-subtitulo: clamp(1.25rem, 1.11rem + 0.57vw, 1.625rem);
   --text-cuerpo: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);
