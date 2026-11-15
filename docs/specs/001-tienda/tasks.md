@@ -29,7 +29,7 @@
 
 ## Fase 3 — Asistente
 
-- [ ] E08 `price-guard.ts` + tests unitarios (primero los tests)
+- [x] E08 `price-guard.ts` + tests unitarios (primero los tests) — *hecha 2026-11-14: `cifrasNoConfirmadas(respuesta, resultados)` devuelve las cifras de la respuesta que no salieron de las herramientas de esa petición (36 tests). Revisa cifras con moneda, porcentajes y decimales en cualquier formato (es-VE, en, NBSP, markdown, ancho completo); los enteros sueltos no. Más estricta que el plan original, que se actualiza: cada cifra se compara **con su moneda** (así «$ 10» no pasa por ser un mínimo al mayor), los porcentajes también se revisan (un descuento inventado se bloquea) y se bloquean las cifras con moneda mal formadas o con dígitos de otros alfabetos. Contrato para E09: las herramientas devuelven precios, totales, tasa y ofertas ya formateados con su moneda, y las instrucciones piden volver a consultarlas en cada respuesta. La sustitución por la respuesta segura y el log `guard-blocked` van en E10. Límite conocido: no detecta cifras escritas en letras (lo cubren las instrucciones y la batería de E12)*
 - [ ] E09 Herramientas, instrucciones y bucle con Claude (`claude.ts`) + tests con Claude simulado
 - [ ] E10 `/api/chat`: Turnstile, límite por IP, tope diario (`chat_uso`), errores + tests de integración; e2e de las cabeceras del servidor (`src/middleware.ts`)
 - [ ] E11 Widget de chat accesible (diálogo, `aria-live`, teclado, aviso de IA, sin JS → WhatsApp); e2e 5

@@ -111,7 +111,8 @@ La tasa BCV es un valor de ejemplo guardado en `ajustes`, rotulado como tal. Lee
 | `info_tienda` | — | Horario, dirección, mayor y detal, cómo pedir, tasa y su fecha |
 
 **Instrucciones del sistema** (`instrucciones.ts`). Dicen, en positivo y con el motivo:
-- solo puedes decir productos, presentaciones y precios que hayan salido de una herramienta en esta conversación;
+- solo puedes decir productos, presentaciones y precios que hayan salido de una herramienta para esta respuesta: si ya salieron antes en la conversación, se vuelven a consultar, porque `price-guard` solo acepta las cifras de la petición en curso;
+- las cifras se copian tal cual las da la herramienta, con su moneda y en números, sin redondear ni convertir;
 - los totales salen de `calcular_total`;
 - si algo no aparece, dilo y ofrece el WhatsApp de la tienda;
 - no hay descuentos fuera del campo `oferta_pct` ni promesas de entrega;
@@ -120,10 +121,10 @@ La tasa BCV es un valor de ejemplo guardado en `ajustes`, rotulado como tal. Lee
 - avisa de que los precios son de ejemplo.
 
 **`price-guard.ts`** (los tests se escriben primero):
-- extrae de la respuesta toda cifra con marca de moneda ($, US$, USD, Bs, bolívares) y todo número decimal;
-- las normaliza (`1.234,56` y `1234.56` son lo mismo);
-- cada cifra tiene que estar entre las devueltas por las herramientas **en esa misma petición**;
-- si una no está, la respuesta se sustituye por una segura: «No tengo ese dato confirmado; escríbenos por WhatsApp» con el enlace, y se registra `guard-blocked` sin el texto del visitante;
+- extrae de la respuesta toda cifra con marca de moneda ($, US$, USD, dólares, Bs, bolívares, VES), todo porcentaje y todo número decimal; los enteros sueltos (cantidades, horas, fechas, gramos) no se revisan;
+- las normaliza (`1.234,56` y `1234.56` son lo mismo); una cifra con moneda que no se puede leer, o con dígitos de otros alfabetos, se bloquea;
+- cada cifra tiene que estar entre las devueltas por las herramientas **en esa misma petición**, y **con la misma moneda**: «$ 10» no pasa porque 10 sea un mínimo al mayor, ni «$ 1.185,11» porque esa cifra sea en bolívares. Por eso las herramientas (E09) devuelven los precios, totales, la tasa y las ofertas ya formateados con su moneda («$ 1,30», «Bs 1.185,11», «$ 1 = Bs 911,62», «10 %»); un número sin moneda en sus resultados solo confirma decimales sueltos;
+- si una no está, la respuesta se sustituye por una segura: «No tengo ese dato confirmado; escríbenos por WhatsApp» con el enlace, y se registra `guard-blocked` sin el texto del visitante. La función (E08) devuelve las cifras sin confirmar; la sustitución y el registro los hace `/api/chat` (E10);
 - así, ni un historial manipulado ni instrucciones inyectadas consiguen colar un precio: solo pasan las cifras de las herramientas de ese turno.
 
 **`/api/chat`** (POST JSON):
