@@ -36,6 +36,9 @@ test.describe('con movimiento', () => {
     await expect(page.getByRole('button', { name: /^Carrito/ })).toBeVisible();
     // El nombre de la animación, no la animación en curso: en una máquina lenta ya habría terminado
     await expect(page.locator('.hero-don-pascal')).toHaveCSS('animation-name', /don-pascal-sube/);
+    // El texto del hero llega en cascada: titular, apoyo, buscador, enlace y aviso
+    await expect(page.locator('#hero-titulo > span').first()).toHaveCSS('animation-name', 'texto-llega');
+    await expect(page.locator('.hero-entrada > form, .hero-entrada > div').first()).toHaveCSS('animation-delay', '0.24s');
 
     // Nada de lo que se ve al cargar queda escondido; lo de abajo espera su turno
     expect(await ocultosEnPantalla(page)).toBe(0);

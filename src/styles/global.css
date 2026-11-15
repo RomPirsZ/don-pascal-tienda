@@ -194,6 +194,36 @@
     animation: brota var(--mov-brota) var(--curva-rebote) 1150ms backwards;
   }
 
+  /* El texto del hero llega antes que él, de arriba abajo: las dos líneas del titular, la
+     frase de apoyo, el buscador, el enlace al chat y el aviso. Aparición de texto de la escala
+     (500 ms, 12 px, desenfoque de 3 px, ease-in-out) escalonada 80 ms (pocos elementos grandes) */
+  @keyframes texto-llega {
+    from {
+      opacity: 0;
+      translate: 0 var(--mov-recorrido);
+      filter: blur(3px);
+    }
+  }
+  .hero-entrada h1 > span,
+  .hero-entrada > :not(h1) {
+    animation: texto-llega var(--mov-revelar) ease-in-out backwards;
+  }
+  .hero-entrada h1 > span:nth-child(2) {
+    animation-delay: 80ms;
+  }
+  .hero-entrada > :nth-child(2) {
+    animation-delay: 160ms;
+  }
+  .hero-entrada > :nth-child(3) {
+    animation-delay: 240ms;
+  }
+  .hero-entrada > :nth-child(4) {
+    animation-delay: 320ms;
+  }
+  .hero-entrada > :nth-child(5) {
+    animation-delay: 400ms;
+  }
+
   /* Vaivén leve de las insignias: solo en escritorio con puntero fino, y en pausa cuando el
      hero no se ve (src/scripts/movimiento.ts pone data-fuera) */
   @media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
